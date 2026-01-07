@@ -1,0 +1,267 @@
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --bg-gradient: linear-gradient(135deg, #f3f8ff 0%, #e6f0ff 40%, #dff5ff 100%);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --radius: 18px;
+            --shadow: 0 20px 60px -22px rgba(15, 23, 42, 0.35);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+        /* Body styles only apply when login view is visible */
+        body:has(#login-view:not(.hidden)),
+        body.login-active {
+            height: 100vh !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background: var(--bg-gradient) !important;
+            padding: 20px !important;
+            position: relative !important;
+            overflow: hidden !important;
+        }
+        
+        /* Ensure dashboard-app is hidden when login is active */
+        body.login-active .dashboard-app {
+            display: none !important;
+        }
+
+        .bg-illustration {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.12), transparent 30%),
+                        radial-gradient(circle at 80% 30%, rgba(56, 189, 248, 0.15), transparent 32%),
+                        radial-gradient(circle at 60% 80%, rgba(16, 185, 129, 0.12), transparent 28%);
+            z-index: 0;
+        }
+
+        .auth-shell {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* --- CONTAINER CARD --- */
+        .auth-card {
+            background: white;
+            width: 100%;
+            max-width: 420px;
+            padding: 44px 34px;
+            border-radius: 28px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* --- HEADER SECTION --- */
+        .logo-area {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 20px;
+            letter-spacing: -0.3px;
+        }
+        
+        .logo-icon {
+            width: 32px; height: 32px;
+            background: conic-gradient(from 180deg at 50% 50%, #22c55e 0deg, #3b82f6 180deg, #f59e0b 360deg);
+            border-radius: 50%;
+        }
+
+        .tagline {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-top: -10px;
+            margin-bottom: 22px;
+            letter-spacing: -0.1px;
+        }
+
+        /* Mascot Image */
+        .mascot-img {
+            width: 130px;
+            height: 130px;
+            object-fit: contain;
+            margin-bottom: 12px;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 10px 25px rgba(37, 99, 235, 0.15));
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        h2 { margin-bottom: 25px; color: var(--text-main); font-size: 1.55rem; }
+
+        /* --- FORM STYLES --- */
+        .input-group {
+            text-align: left;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .input-group label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #334155;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .input-wrapper { position: relative; }
+
+        .input-field {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        .input-field:focus {
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Password Eye Icon */
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .forgot-link {
+            display: block;
+            text-align: right;
+            font-size: 0.8rem;
+            color: var(--primary);
+            text-decoration: none;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(120deg, #2563eb, #1d4ed8);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
+            box-shadow: 0 10px 30px -12px rgba(37, 99, 235, 0.6);
+        }
+
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 12px 32px -12px rgba(37, 99, 235, 0.65); }
+
+        .divider {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+        }
+        .divider span { padding: 0 10px; }
+
+        .btn-social {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: background 0.1s, transform 0.1s;
+        }
+
+        .btn-social:hover { background: #f8fafc; transform: translateY(-1px); }
+        .btn-social i { font-size: 1.2rem; }
+
+        /* --- FOOTER --- */
+        .footer-text {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .footer-text a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .tech-badge {
+            margin-top: 30px;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        /* --- JS TOGGLE CLASSES --- */
+        .hidden { display: none; }
+
+        /* --- LOGIN VIEW CONTAINER --- */
+        .login-view {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+        }
+        
+        .login-view.hidden {
+            display: none;
+        }
+
+        /* --- DASHBOARD APP CONTAINER --- */
+        .dashboard-app {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            position: relative;
+        }
+
+        .dashboard-app.hidden {
+            display: none !important;
+        }
+        
+        /* Reset body styles when dashboard is shown */
+        body:not(.login-active) {
+            /* Let style.css handle body styles for dashboard */
+        }

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpendX AI · Personal Finance Copilot</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.0.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="login2.css" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+    <script src="login.js"></script>
+</head>
+<body>
+
+    <div class="bg-illustration"></div>
+    <div class="auth-shell">
+        <div class="auth-card">
+            <div class="logo-area">
+                <div class="logo-icon"></div>
+               SpendX AI
+            </div>
+            <p class="tagline">Your Personal Finance Copilot</p>
+            
+            <img src="money.png" alt="AI Robot" class="mascot-img">
+
+            <h2 id="form-title">Welcome back!</h2>
+
+            <form id="login-form" onsubmit="handleLogin(event)">
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" class="input-field" placeholder="@mail.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="login-pass" class="input-field" placeholder="••••••••••••" required>
+                        <i class="ri-eye-off-line toggle-password" onclick="togglePassword('login-pass', this)"></i>
+                    </div>
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn-primary" >Log In</button>
+            </form>
+
+            <form id="signup-form" class="hidden" onsubmit="handleLogin(event)">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" class="input-field" placeholder="Arjun Patel">
+                </div>
+
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" class="input-field" placeholder="you@mail.com">
+                </div>
+
+                <div class="input-group">
+                    <label>Create Password</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="signup-pass" class="input-field" placeholder="Create a password">
+                        <i class="ri-eye-off-line toggle-password" onclick="togglePassword('signup-pass', this)"></i>
+                    </div>
+                </div>
+
+                <button type="submit" onclick="handleLogin(event)" class="btn-primary">Create Account</button>
+            </form>
+
+            <div class="divider"><span>or</span></div>
+
+            <button class="btn-social">
+                <i class="ri-google-fill" style="color: #DB4437;"></i> Continue with Google
+            </button>
+            <button class="btn-social">
+                <i class="ri-fire-fill" style="color: #FFCA28;"></i> Continue with Firebase
+            </button>
+
+            <p class="footer-text" id="toggle-text">
+                New here? <a onclick="toggleForm()">Sign up now &rarr;</a>
+            </p>
+
+            <p class="tech-badge">Built using Google Gemini™ and Firebase™</p>
+        </div>
+    </div>
+
+    
+</body>
+</html>
