@@ -959,14 +959,14 @@
         }
         
         // Using Gemini 1.5 Flash model (fast, efficient, and cost-effective)
-        const GEMINI_MODEL = 'gemini-1.5-flash';
+        const GEMINI_MODEL = 'gemini-2.5-flash';
         
         // API URLs (will be set after key is loaded)
         let GEMINI_API_URL = '';
         let GEMINI_API_URL_ALT = '';
         
         function updateApiUrls() {
-            // Primary endpoint - v1 API with gemini-1.5-flash
+            // Primary endpoint - v1 API with gemini-2.5-flash
             GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
             // Alternative endpoint - v1beta API (fallback)
             GEMINI_API_URL_ALT = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
