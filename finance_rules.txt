@@ -201,19 +201,8 @@ financial advice."
    - Reduce financial stress
 
 87. Blue print of output :
-    -Decision: YES – SIP is affordable
+    allwayees in short it should 3 catagory and each catagory have max 3 line
 
-Reason:
-Your monthly income is ₹30,000 and expenses are ₹19,000.
-After expenses and EMI, you still have ₹6,000 remaining.
-
-Risk:
-Low risk, but emergency fund is below recommended level.
-
-Recommendation:
-- Continue ₹5,000 SIP
-- Start building emergency fund
-- Reduce dining expenses slightly
 
 
 

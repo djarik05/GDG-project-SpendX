@@ -50,6 +50,15 @@
                 monthly: 5000,
                 emiDue: 3500,
                 billsDue: 1500
+            },
+            chatHistory: {
+                conversations: [] // Will store all chat messages from all pages
+            },
+            userProfile: {
+                age: 28, // Default age, can be updated
+                riskTolerance: 'moderate', // conservative, moderate, aggressive
+
+                investmentExperience: 'beginner' // beginner, intermediate, advanced
             }
         };
 
@@ -470,9 +479,18 @@
                 document.getElementById('ask-view').style.display = 'flex';
                 document.getElementById('page-title').innerText = "Ask FinGuide";
                 
+                // Load all chat history from different pages
+                loadAllChatHistory();
+                
                 // If clicked from a quick action button
                 if (quickQuery) {
                     document.getElementById('user-input').value = quickQuery;
+                    // If asking about investments, also display recommendations
+                    if (quickQuery.toLowerCase().includes('invest') || quickQuery.toLowerCase().includes('where to invest')) {
+                        setTimeout(() => {
+                            displayInvestmentRecommendations();
+                        }, 500);
+                    }
                     sendMessage();
                 }
             } else if (viewId === 'insights') {
@@ -623,6 +641,10 @@
             // Update all pages with initial data
             updateAllPages();
             
+            // Extract and store chat history from all pages
+            const extractedHistory = extractChatHistoryFromPages();
+            appData.chatHistory.conversations = extractedHistory;
+            
             // Attach form handlers
             const incomeForm = document.getElementById('addIncomeForm');
             const expenseForm = document.getElementById('addExpenseForm');
@@ -659,6 +681,65 @@
             updateWelcomeMessage();
         });
 
+        // Update user profile
+        function updateUserProfile(age, riskTolerance, investmentExperience) {
+            if (age && age > 0 && age < 100) {
+                appData.userProfile.age = age;
+            }
+            if (riskTolerance && ['conservative', 'moderate', 'aggressive'].includes(riskTolerance)) {
+                appData.userProfile.riskTolerance = riskTolerance;
+            }
+            if (investmentExperience && ['beginner', 'intermediate', 'advanced'].includes(investmentExperience)) {
+                appData.userProfile.investmentExperience = investmentExperience;
+            }
+        }
+
+        // Display investment recommendations in chat
+        function displayInvestmentRecommendations() {
+            const chatHistory = document.getElementById('chat-history');
+            if (!chatHistory) return;
+            
+            const recommendations = getInvestmentRecommendations();
+            
+            // Create recommendation message
+            const recDiv = document.createElement('div');
+            recDiv.className = 'message msg-ai';
+            recDiv.style.background = '#f0f9ff';
+            recDiv.style.borderLeft = '3px solid #3b82f6';
+            recDiv.style.padding = '16px';
+            recDiv.style.marginTop = '10px';
+            
+            let html = `<strong>💼 Investment Recommendations</strong><br><br>`;
+            html += `<p style="margin-bottom: 12px;">${recommendations.summary}</p>`;
+            html += `<div style="margin-top: 16px;">`;
+            
+            recommendations.recommendations.forEach((rec, index) => {
+                html += `
+                    <div style="background: white; padding: 12px; margin-bottom: 12px; border-radius: 8px; border-left: 3px solid #3b82f6;">
+                        <strong>${index + 1}. ${rec.name}</strong><br>
+                        <small style="color: #64748b;">${rec.type} • ${rec.category}</small><br><br>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.9rem;">
+                            <div><strong>Allocation:</strong> ${rec.allocation.toFixed(1)}%</div>
+                            <div><strong>SIP Amount:</strong> ₹${rec.sipAmount.toLocaleString('en-IN')}/month</div>
+                            <div><strong>Expected Return:</strong> ${rec.expectedReturn}</div>
+                            <div><strong>Risk Level:</strong> ${rec.riskLevel}</div>
+                            <div><strong>Time Horizon:</strong> ${rec.timeHorizon}</div>
+                            <div><strong>Suitability:</strong> ${rec.suitability}</div>
+                        </div>
+                        <p style="margin-top: 8px; font-size: 0.9rem; color: #475569;">${rec.description}</p>
+                        <small style="color: #64748b;"><strong>Tax Benefit:</strong> ${rec.taxBenefit}</small>
+                    </div>
+                `;
+            });
+            
+            html += `</div>`;
+            html += `<p style="margin-top: 12px; font-size: 0.85rem; color: #64748b; font-style: italic;">This guidance is for educational purposes only and not professional financial advice. Please consult a SEBI-registered advisor before investing.</p>`;
+            
+            recDiv.innerHTML = html;
+            chatHistory.appendChild(recDiv);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
         // Update welcome message with current financial data
         function updateWelcomeMessage() {
             const welcomeMsg = document.querySelector('#chat-history .message.msg-ai:first-child');
@@ -667,8 +748,218 @@
                     <strong>SpendX AI</strong><br>
                     Hi User-name! I'm your finance copilot. Based on your ₹${appData.income.monthly.toLocaleString('en-IN')} income, ask me anything! <br><br>
                     Try asking: <br>
-                    <span style="color:var(--primary); cursor:pointer;" onclick="switchTab('ask', null, 'Can I afford a ₹5,000 SIP?')">"Can I afford a ₹5,000 SIP?"</span>
+                    <span style="color:var(--primary); cursor:pointer;" onclick="switchTab('ask', null, 'Can I afford a ₹5,000 SIP?')">"Can I afford a ₹5,000 SIP?"</span><br>
+                    <span style="color:var(--primary); cursor:pointer;" onclick="switchTab('ask', null, 'Where to invest?')">"Where to invest?"</span>
                 `;
+            }
+        }
+
+        // Extract chat history from all pages
+        function extractChatHistoryFromPages() {
+            const allHistory = [];
+            
+            // Extract from Expenses page
+            const expensesHistory = document.querySelectorAll('.spending-right .chat-history-item');
+            expensesHistory.forEach(item => {
+                const content = item.querySelector('.chat-history-content');
+                if (content) {
+                    const title = content.querySelector('h5')?.textContent || '';
+                    const merchants = Array.from(content.querySelectorAll('.merchant-item')).map(m => {
+                        const name = m.querySelector('.merchant-name')?.textContent || '';
+                        const amount = m.querySelector('.merchant-amount')?.textContent || '';
+                        const date = m.querySelector('.merchant-date')?.textContent || '';
+                        return { name, amount, date };
+                    });
+                    if (title || merchants.length > 0) {
+                        allHistory.push({
+                            page: 'expenses',
+                            type: 'spending',
+                            title: title,
+                            merchants: merchants,
+                            timestamp: new Date().toISOString()
+                        });
+                    }
+                }
+            });
+            
+            // Extract from Income page
+            const incomeHistory = document.querySelectorAll('.income-right .chat-history-item');
+            incomeHistory.forEach(item => {
+                const content = item.querySelector('.chat-history-content');
+                if (content) {
+                    const title = content.querySelector('h5')?.textContent || '';
+                    const amount = content.querySelector('p')?.textContent || '';
+                    const oldAmount = content.querySelector('.strikethrough')?.textContent || '';
+                    const date = content.querySelector('.date')?.textContent || '';
+                    if (title) {
+                        allHistory.push({
+                            page: 'income',
+                            type: 'income',
+                            title: title,
+                            amount: amount,
+                            oldAmount: oldAmount,
+                            date: date,
+                            timestamp: new Date().toISOString()
+                        });
+                    }
+                }
+            });
+            
+            // Extract from Investments page
+            const investmentsHistory = document.querySelectorAll('.investments-right .chat-history-item');
+            investmentsHistory.forEach(item => {
+                const content = item.querySelector('.chat-history-content');
+                if (content) {
+                    const title = content.querySelector('h5')?.textContent || '';
+                    const sipProgress = content.querySelector('.sip-progress');
+                    const amount = content.querySelector('p')?.textContent || '';
+                    const date = content.querySelector('.date')?.textContent || '';
+                    if (title) {
+                        allHistory.push({
+                            page: 'investments',
+                            type: 'investment',
+                            title: title,
+                            sipProgress: sipProgress ? sipProgress.innerHTML : '',
+                            amount: amount,
+                            date: date,
+                            timestamp: new Date().toISOString()
+                        });
+                    }
+                }
+            });
+            
+            // Extract from EMI page
+            const emiHistory = document.querySelectorAll('.emi-right .chat-history-item');
+            emiHistory.forEach(item => {
+                const content = item.querySelector('.chat-history-content');
+                if (content) {
+                    const title = content.querySelector('h5')?.textContent || '';
+                    const amount = content.querySelector('p')?.textContent || '';
+                    const date = content.querySelector('.date')?.textContent || '';
+                    if (title) {
+                        allHistory.push({
+                            page: 'emi',
+                            type: 'emi',
+                            title: title,
+                            amount: amount,
+                            date: date,
+                            timestamp: new Date().toISOString()
+                        });
+                    }
+                }
+            });
+            
+            return allHistory;
+        }
+
+        // Load all chat history into ask-view
+        function loadAllChatHistory() {
+            const chatHistoryContainer = document.getElementById('chat-history');
+            if (!chatHistoryContainer) return;
+            
+            // Check if history has already been loaded (to avoid duplicates)
+            const hasHistoryLoaded = chatHistoryContainer.querySelector('[data-history-loaded="true"]');
+            if (hasHistoryLoaded) return; // Already loaded, don't reload
+            
+            // Extract history from all pages
+            const allHistory = extractChatHistoryFromPages();
+            
+            // Store in appData (merge with existing, avoid duplicates)
+            const existingKeys = new Set();
+            appData.chatHistory.conversations.forEach(c => {
+                if (c.page && c.title) {
+                    existingKeys.add(c.page + c.title);
+                }
+            });
+            
+            allHistory.forEach(item => {
+                const key = item.page + item.title;
+                if (!existingKeys.has(key)) {
+                    appData.chatHistory.conversations.push(item);
+                    existingKeys.add(key);
+                }
+            });
+            
+            // Get existing messages (welcome message and actual chat messages)
+            const existingMessages = Array.from(chatHistoryContainer.querySelectorAll('.message'));
+            const welcomeMsg = existingMessages.find(msg => msg.querySelector('strong')?.textContent === 'SpendX AI');
+            
+            // Group history by page (only page-specific history, not ask page messages)
+            const historyByPage = {};
+            appData.chatHistory.conversations.forEach(item => {
+                if (item.page !== 'ask' && item.title) {
+                    if (!historyByPage[item.page]) {
+                        historyByPage[item.page] = [];
+                    }
+                    historyByPage[item.page].push(item);
+                }
+            });
+            
+            // Only add history if there's any to display
+            if (Object.keys(historyByPage).length > 0) {
+                // Add separator before history
+                const separator = document.createElement('div');
+                separator.className = 'message msg-ai';
+                separator.style.background = '#f8fafc';
+                separator.style.borderLeft = '3px solid #3b82f6';
+                separator.style.padding = '12px 16px';
+                separator.style.marginTop = '20px';
+                separator.style.marginBottom = '10px';
+                separator.innerHTML = '<strong>📊 Chat History from Other Pages</strong>';
+                separator.setAttribute('data-history-loaded', 'true');
+                chatHistoryContainer.appendChild(separator);
+                
+                // Display history grouped by page
+                Object.keys(historyByPage).forEach(page => {
+                    const pageHistory = historyByPage[page];
+                    
+                    // Add page header
+                    const pageHeader = document.createElement('div');
+                    pageHeader.className = 'message msg-ai';
+                    pageHeader.style.background = '#f0f9ff';
+                    pageHeader.style.borderLeft = '3px solid #3b82f6';
+                    pageHeader.style.padding = '12px 16px';
+                    pageHeader.style.marginTop = '10px';
+                    pageHeader.innerHTML = `<strong>📊 History from ${page.charAt(0).toUpperCase() + page.slice(1)} Page</strong>`;
+                    chatHistoryContainer.appendChild(pageHeader);
+                    
+                    // Add history items
+                    pageHistory.forEach(item => {
+                        const historyDiv = document.createElement('div');
+                        historyDiv.className = 'message msg-ai';
+                        historyDiv.style.background = '#f8fafc';
+                        historyDiv.style.borderLeft = '2px solid #e2e8f0';
+                        historyDiv.style.padding = '12px 16px';
+                        historyDiv.style.marginTop = '8px';
+                        
+                        let content = `<strong>${item.title}</strong><br>`;
+                        
+                        if (item.type === 'spending' && item.merchants && item.merchants.length > 0) {
+                            item.merchants.forEach(merchant => {
+                                content += `${merchant.name}: ${merchant.amount} (${merchant.date})<br>`;
+                            });
+                        } else if (item.amount) {
+                            content += `Amount: ${item.amount}<br>`;
+                            if (item.oldAmount) {
+                                content += `<span style="text-decoration: line-through; color: #94a3b8;">${item.oldAmount}</span><br>`;
+                            }
+                        }
+                        
+                        if (item.date) {
+                            content += `<small style="color: #64748b;">${item.date}</small>`;
+                        }
+                        
+                        if (item.sipProgress) {
+                            content += item.sipProgress;
+                        }
+                        
+                        historyDiv.innerHTML = content;
+                        chatHistoryContainer.appendChild(historyDiv);
+                    });
+                });
+                
+                // Scroll to bottom
+                chatHistoryContainer.scrollTop = chatHistoryContainer.scrollHeight;
             }
         }
 
@@ -977,6 +1268,170 @@
             updateApiUrls();
         });
         
+        // ==================== PROFESSIONAL INVESTMENT RECOMMENDATION SYSTEM ====================
+        // 
+        // This system provides personalized investment recommendations based on:
+        // - User's age (affects equity allocation: 100 - age rule)
+        // - Risk tolerance (conservative, moderate, aggressive)
+        // - Monthly income and savings capacity
+        //
+        // Returns 5 investment recommendations:
+        // 1. Large Cap Equity Fund (40% of equity allocation)
+        // 2. Mid Cap Equity Fund (30% of equity allocation)
+        // 3. Balanced Advantage Fund (hybrid equity-debt)
+        // 4. Short Duration Debt Fund (debt allocation)
+        // 5. Flexi Cap Equity Fund (30% of equity allocation)
+        //
+        // To update user profile: updateUserProfile(age, riskTolerance, investmentExperience)
+        // Example: updateUserProfile(35, 'moderate', 'intermediate')
+        //
+        // To display recommendations: displayInvestmentRecommendations()
+        // ====================================================================================
+        
+        // Professional Investment Recommendation System
+        function getInvestmentRecommendations() {
+            const age = appData.userProfile.age;
+            const riskTolerance = appData.userProfile.riskTolerance;
+            const monthlyIncome = appData.income.monthly;
+            const monthlySavings = appData.income.monthly - appData.expenses.monthly - (appData.emi?.monthly || 0);
+            const annualIncome = monthlyIncome * 12;
+            
+            // Calculate risk-adjusted allocation based on age and risk tolerance
+            let equityAllocation = 0;
+            let debtAllocation = 0;
+            let balancedAllocation = 0;
+            
+            // Age-based rule: 100 - age = equity allocation (traditional rule)
+            const ageBasedEquity = Math.max(0, 100 - age);
+            
+            // Risk tolerance adjustment - ensure total equals 100%
+            if (riskTolerance === 'conservative') {
+                equityAllocation = Math.max(20, ageBasedEquity - 20);
+                debtAllocation = 50;
+                balancedAllocation = 30;
+            } else if (riskTolerance === 'moderate') {
+                equityAllocation = ageBasedEquity;
+                debtAllocation = 30;
+                balancedAllocation = 20;
+            } else { // aggressive
+                equityAllocation = Math.min(80, ageBasedEquity + 10);
+                debtAllocation = 10;
+                balancedAllocation = 10;
+            }
+            
+            // Normalize allocations to ensure they sum to 100%
+            const totalAllocation = equityAllocation + debtAllocation + balancedAllocation;
+            if (totalAllocation !== 100) {
+                const normalizationFactor = 100 / totalAllocation;
+                equityAllocation = Math.round(equityAllocation * normalizationFactor);
+                debtAllocation = Math.round(debtAllocation * normalizationFactor);
+                balancedAllocation = 100 - equityAllocation - debtAllocation; // Ensure exact 100%
+            }
+            
+            // Calculate recommended SIP amount (30% of income or available savings, whichever is lower)
+            const maxSIP = Math.min(monthlyIncome * 0.30, monthlySavings * 0.80);
+            const recommendedSIP = Math.max(1000, Math.floor(maxSIP / 1000) * 1000); // Round to nearest 1000
+            
+            // Generate 5 investment recommendations
+            const recommendations = [];
+            
+            // Calculate individual fund allocations (equity funds split: 40%, 30%, 30% of equity portion)
+            const largeCapAllocation = (equityAllocation * 0.4).toFixed(1);
+            const midCapAllocation = (equityAllocation * 0.3).toFixed(1);
+            const flexiCapAllocation = (equityAllocation * 0.3).toFixed(1);
+            
+            // 1. Large Cap Equity Fund (40% of equity allocation)
+            recommendations.push({
+                name: 'Large Cap Equity Fund',
+                type: 'Equity Fund',
+                category: 'Large Cap',
+                allocation: parseFloat(largeCapAllocation),
+                sipAmount: Math.max(500, Math.floor(recommendedSIP * parseFloat(largeCapAllocation) / 100)),
+                expectedReturn: '12-15%',
+                riskLevel: 'Moderate',
+                timeHorizon: '5+ years',
+                description: 'Invests in top 100 companies by market cap. Lower volatility than mid/small cap funds.',
+                suitability: age < 40 ? 'High' : 'Medium',
+                taxBenefit: 'Long-term capital gains tax: 10% above ₹1 lakh (1 year+)'
+            });
+            
+            // 2. Mid Cap Equity Fund (30% of equity allocation)
+            recommendations.push({
+                name: 'Mid Cap Equity Fund',
+                type: 'Equity Fund',
+                category: 'Mid Cap',
+                allocation: parseFloat(midCapAllocation),
+                sipAmount: Math.max(500, Math.floor(recommendedSIP * parseFloat(midCapAllocation) / 100)),
+                expectedReturn: '14-18%',
+                riskLevel: 'High',
+                timeHorizon: '7+ years',
+                description: 'Invests in companies ranked 101-250 by market cap. Higher growth potential with moderate risk.',
+                suitability: age < 35 ? 'High' : 'Medium',
+                taxBenefit: 'Long-term capital gains tax: 10% above ₹1 lakh (1 year+)'
+            });
+            
+            // 3. Balanced/Hybrid Fund
+            recommendations.push({
+                name: 'Balanced Advantage Fund',
+                type: 'Hybrid Fund',
+                category: 'Balanced',
+                allocation: balancedAllocation,
+                sipAmount: Math.max(500, Math.floor(recommendedSIP * balancedAllocation / 100)),
+                expectedReturn: '10-13%',
+                riskLevel: 'Moderate',
+                timeHorizon: '3-5 years',
+                description: 'Dynamic allocation between equity (40-80%) and debt. Automatically rebalances based on market conditions.',
+                suitability: 'High for all ages',
+                taxBenefit: 'Equity taxation: 10% LTCG above ₹1 lakh (1 year+)'
+            });
+            
+            // 4. Debt Fund
+            recommendations.push({
+                name: 'Short Duration Debt Fund',
+                type: 'Debt Fund',
+                category: 'Debt',
+                allocation: debtAllocation,
+                sipAmount: Math.max(500, Math.floor(recommendedSIP * debtAllocation / 100)),
+                expectedReturn: '6-8%',
+                riskLevel: 'Low',
+                timeHorizon: '1-3 years',
+                description: 'Invests in high-quality corporate bonds and government securities. Lower risk, stable returns.',
+                suitability: age > 50 ? 'High' : 'Medium',
+                taxBenefit: 'Taxed as per income tax slab. Indexation benefit after 3 years'
+            });
+            
+            // 5. Flexi Cap / Multi Cap Fund (30% of equity allocation)
+            recommendations.push({
+                name: 'Flexi Cap Equity Fund',
+                type: 'Equity Fund',
+                category: 'Flexi Cap',
+                allocation: parseFloat(flexiCapAllocation),
+                sipAmount: Math.max(500, Math.floor(recommendedSIP * parseFloat(flexiCapAllocation) / 100)),
+                expectedReturn: '13-16%',
+                riskLevel: 'Moderate to High',
+                timeHorizon: '5+ years',
+                description: 'Invests across large, mid, and small cap stocks. Flexible allocation provides diversification and growth.',
+                suitability: age < 45 ? 'High' : 'Medium',
+                taxBenefit: 'Long-term capital gains tax: 10% above ₹1 lakh (1 year+)'
+            });
+            
+            // Calculate total allocation from individual funds
+            const totalFundAllocation = recommendations.reduce((sum, rec) => sum + rec.allocation, 0);
+            
+            return {
+                recommendations: recommendations,
+                totalAllocation: totalFundAllocation,
+                recommendedSIP: recommendedSIP,
+                riskProfile: {
+                    age: age,
+                    riskTolerance: riskTolerance,
+                    equityAllocation: equityAllocation,
+                    debtAllocation: debtAllocation,
+                    balancedAllocation: balancedAllocation
+                },
+                summary: `Based on your age (${age} years), ${riskTolerance} risk tolerance, and monthly income of ₹${monthlyIncome.toLocaleString('en-IN')}, we recommend a diversified portfolio with ${equityAllocation}% equity funds, ${debtAllocation}% debt funds, and ${balancedAllocation}% balanced funds. Total recommended monthly SIP: ₹${recommendedSIP.toLocaleString('en-IN')}.`
+            };
+        }
 
         // Build financial context for AI
         function buildFinancialContext() {
@@ -992,7 +1447,25 @@
                 .map(src => `${src.name}: ₹${src.amount.toLocaleString('en-IN')}`)
                 .join(', ');
             
+            // Get investment recommendations
+            const investmentRecs = getInvestmentRecommendations();
+            
+            // Format investment recommendations for AI context
+            const investmentRecsText = investmentRecs.recommendations.map((rec, index) => {
+                return `${index + 1}. ${rec.name} (${rec.type})
+   - Allocation: ${rec.allocation.toFixed(1)}%
+   - Recommended SIP: ₹${rec.sipAmount.toLocaleString('en-IN')}/month
+   - Expected Return: ${rec.expectedReturn} p.a.
+   - Risk Level: ${rec.riskLevel}
+   - Time Horizon: ${rec.timeHorizon}
+   - Description: ${rec.description}
+   - Suitability: ${rec.suitability} for age ${appData.userProfile.age}
+   - Tax Benefit: ${rec.taxBenefit}`;
+            }).join('\n\n');
+            
             return `You are FinGuide AI, a Personal Finance Decision Assistant. You provide educational & decision-support guidance only. You are NOT a SEBI-registered advisor.
+
+IMPORTANT: When users ask about investments or "where to invest", you MUST provide the 5 investment recommendations below in a structured format.
 
 IMPORTANT: You MUST always respond in this EXACT format (keep it SHORT and CONCISE, no full summaries):
 
@@ -1011,12 +1484,24 @@ Recommendation:
 
 User's Financial Data:
 Monthly Income: ₹${appData.income.monthly.toLocaleString('en-IN')}
+Annual Income: ₹${(appData.income.monthly * 12).toLocaleString('en-IN')}
 Income Sources: ${incomeSources}
 Monthly Expenses: ₹${appData.expenses.monthly.toLocaleString('en-IN')}
 Expense Categories: ${expenseCategories}
 Monthly EMI: ₹${emiAmount.toLocaleString('en-IN')}
 Monthly Savings: ₹${savings.toLocaleString('en-IN')} (${savingsPercent}% of income)
 Total Investments: ₹${appData.investments.total.toLocaleString('en-IN')}
+
+User Profile:
+Age: ${appData.userProfile.age} years
+Risk Tolerance: ${appData.userProfile.riskTolerance}
+Investment Experience: ${appData.userProfile.investmentExperience}
+
+INVESTMENT RECOMMENDATIONS (Use when user asks about investments):
+${investmentRecsText}
+
+Portfolio Summary:
+${investmentRecs.summary}
 
 Key Rules:
 - Monthly Savings = Income − Expenses − EMI
@@ -1025,10 +1510,12 @@ Key Rules:
 - Emergency fund target = 6 × monthly expenses
 - EMI > 40% of income → High Risk
 - Expenses > 80% of income → Lifestyle Risk
+- Age-based equity allocation: 100 - age (traditional rule)
 - Always use ₹ currency format
 - Keep responses SHORT and ACTIONABLE
 - Never provide full summaries or lengthy explanations
 - Always include: "This guidance is for educational purposes only and not professional financial advice."
+- When providing investment recommendations, list all 5 funds with their details
 
 Now answer the user's question in the required format above.`;
         }
@@ -1050,6 +1537,14 @@ Now answer the user's question in the required format above.`;
             userMsgDiv.className = 'message msg-user';
             userMsgDiv.innerText = message;
             chatHistory.appendChild(userMsgDiv);
+            
+            // Store user message
+            appData.chatHistory.conversations.push({
+                page: 'ask',
+                type: 'user',
+                message: message,
+                timestamp: new Date().toISOString()
+            });
 
             // Clear Input
             input.value = "";
@@ -1163,6 +1658,22 @@ Now answer the user's question in the required format above.`;
                         <strong>Gemini</strong><br>
                         ${formatAIResponse(aiText)}
                     `;
+                    
+                    // Store AI response
+                    appData.chatHistory.conversations.push({
+                        page: 'ask',
+                        type: 'ai',
+                        message: aiText,
+                        timestamp: new Date().toISOString()
+                    });
+                    
+                    // If message is about investments, also display structured recommendations
+                    const messageLower = message.toLowerCase();
+                    if (messageLower.includes('invest') || messageLower.includes('where to invest') || messageLower.includes('investment')) {
+                        setTimeout(() => {
+                            displayInvestmentRecommendations();
+                        }, 1000);
+                    }
                 } else if (data.error) {
                     throw new Error(data.error.message || 'API returned an error');
                 } else {
@@ -1198,6 +1709,8 @@ Now answer the user's question in the required format above.`;
 
         // Format AI response for better display with structured format
         function formatAIResponse(text) {
+            if (!text || typeof text !== "string") return text;
+        
             // Check if response follows the structured format
             const hasDecision = /Decision:\s*[YES|NO|MAYBE]/i.test(text);
             const hasReason = /Reason:/i.test(text);
@@ -1206,32 +1719,50 @@ Now answer the user's question in the required format above.`;
             
             if (hasDecision || hasReason || hasRisk || hasRecommendation) {
                 // Format structured response
-                let formatted = text
-                    // Format Decision
-                    .replace(/Decision:\s*([^\n]+)/gi, '<div class="ai-decision"><strong>Decision:</strong> $1</div>')
-                    // Format Reason section
-                    .replace(/Reason:\s*\n?([^\n]+(?:\n[^\n]+)*?)(?=\n(?:Risk:|Recommendation:|$))/gi, 
-                        '<div class="ai-reason"><strong>Reason:</strong><br>$1</div>')
-                    // Format Risk section
-                    .replace(/Risk:\s*\n?([^\n]+(?:\n[^\n]+)*?)(?=\n(?:Recommendation:|$))/gi, 
-                        '<div class="ai-risk"><strong>Risk:</strong><br>$1</div>')
-                    // Format Recommendation section
-                    .replace(/Recommendation:\s*\n?([^\n]+(?:\n[^\n]+)*?)(?=\n|$)/gi, 
-                        '<div class="ai-recommendation"><strong>Recommendation:</strong><br>$1</div>')
-                    // Format bullet points
-                    .replace(/^[-•]\s+(.+)$/gm, '<li>$1</li>')
-                    // Convert line breaks
-                    .replace(/\n/g, '<br>');
-                
-                // Wrap bullet points in ul tags
-                formatted = formatted.replace(/(<li>.*?<\/li>)/gs, '<ul>$1</ul>');
+                const sections = [
+                    { key: "Decision", className: "ai-decision" },
+                    { key: "Reason", className: "ai-reason" },
+                    { key: "Risk", className: "ai-risk" },
+                    { key: "Recommendation", className: "ai-recommendation" }
+                ];
+        
+                let formattedText = text;
+        
+                sections.forEach((section, index) => {
+                    const nextSection = sections[index + 1]?.key;
+        
+                    const regex = new RegExp(
+                        `${section.key}:\\s*([\\s\\S]*?)` +
+                        (nextSection ? `(?=\\n${nextSection}:|$)` : `$`),
+                        "gi"
+                    );
+        
+                    formattedText = formattedText.replace(regex, (_, content) => {
+                        return `<div class="${section.className}"><strong>${section.key}:</strong><br>${content.trim()}</div>`;
+                    });
+                });
+        
+                // Bullet points → list items
+                formattedText = formattedText.replace(
+                    /^[-•]\s+(.*)$/gm,
+                    "<li>$1</li>"
+                );
+        
+                // Wrap list items in <ul>
+                formattedText = formattedText.replace(
+                    /(<li>.*<\/li>)/gs,
+                    "<ul>$1</ul>"
+                );
+        
+                // Line breaks
+                formattedText = formattedText.replace(/\n/g, "<br>");
                 
                 // Add disclaimer if not present
-                if (!formatted.includes('educational purposes')) {
-                    formatted += '<div class="ai-disclaimer" style="margin-top: 12px; padding: 10px; background: #f0f9ff; border-left: 3px solid #3b82f6; border-radius: 4px; font-size: 0.85rem; color: #64748b;"><em>This guidance is for educational purposes only and not professional financial advice.</em></div>';
+                if (!formattedText.includes('educational purposes')) {
+                    formattedText += '<div class="ai-disclaimer" style="margin-top: 12px; padding: 10px; background: #f0f9ff; border-left: 3px solid #3b82f6; border-radius: 4px; font-size: 0.85rem; color: #64748b;"><em>This guidance is for educational purposes only and not professional financial advice.</em></div>';
                 }
                 
-                return formatted;
+                return formattedText.trim();
             } else {
                 // Format regular response
                 let formatted = text
