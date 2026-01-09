@@ -512,7 +512,7 @@
         .bg-yellow { background: #fef3c7; color: #b45309; }
         .bg-blue { background: #dbeafe; color: #1e40af; }
 
-        .amount { font-weight: 700; font-size: 1.1rem; }
+        .amount { font-weight: 700; font-size: 4mm; text-align: left;}
 
         /* Progress Bar */
         .progress-container { margin-top: 20px; }
@@ -677,6 +677,35 @@
             outline: none;
         }
 
+        .mic-btn-mini {
+            width: 34px;
+            height: 34px;
+            border-radius: 999px;
+            border: none;
+            background: #64748b;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+        .mic-btn-mini:hover {
+            background: #475569;
+            transform: scale(1.05);
+        }
+        .mic-btn-mini.recording {
+            background: #ef4444;
+            animation: pulse-mini 1.5s infinite;
+        }
+        .mic-btn-mini.recording:hover {
+            background: #dc2626;
+        }
+        @keyframes pulse-mini {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
         .ask-input-mini button {
             width: 34px;
             height: 34px;
@@ -696,13 +725,105 @@
         .chat-view { display: none; height: 100%; flex-direction: column; }
         .chat-container { flex: 1; background: white; border-radius: var(--radius); padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; box-shadow: var(--shadow); border:1px solid #e2e8f0; }
         
-        .message { max-width: 80%; padding: 15px; border-radius: 18px; line-height: 1.5; font-size: 0.95rem; }
+        .message { max-width: 80%; padding: 15px; border-radius: 18px; line-height: 1.5; font-size: 0.95rem; position: relative; }
         .msg-ai { background: #f0f9ff; align-self: flex-start; border-top-left-radius: 2px; color: #334155; }
         .msg-user { background: var(--primary); color: white; align-self: flex-end; border-top-right-radius: 2px; }
+        
+        /* Text-to-Speech Button Styles */
+        .tts-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            z-index: 10;
+            opacity: 0.7;
+        }
+        
+        .message:hover .tts-btn {
+            opacity: 1;
+        }
+        
+        .tts-btn:hover {
+            background: rgba(37, 99, 235, 0.2);
+            border-color: var(--primary);
+            transform: scale(1.1);
+        }
+        
+        .tts-btn.speaking {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #ef4444;
+            color: #ef4444;
+            animation: pulse-tts 1.5s infinite;
+        }
+        
+        @keyframes pulse-tts {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* TTS Button in Reply Headers */
+        .reply-header {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+        }
+        
+        .tts-button {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+            opacity: 0.8;
+        }
+        
+        .tts-button:hover {
+            background: rgba(37, 99, 235, 0.2);
+            border-color: var(--primary);
+            transform: scale(1.05);
+            opacity: 1;
+        }
+        
+        .tts-button.speaking {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #ef4444;
+            color: #ef4444;
+            animation: pulse-tts 1.5s infinite;
+        }
         
         .chat-input-area { margin-top: 15px; display: flex; gap: 10px; }
         .chat-input { flex: 1; padding: 15px; border-radius: 30px; border: 1px solid #e2e8f0; outline: none; }
         .chat-input:disabled { background: #f1f5f9; cursor: not-allowed; opacity: 0.6; }
+        .mic-btn { width: 50px; height: 50px; border-radius: 50%; background: #64748b; color: white; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: all 0.2s; }
+        .mic-btn:hover { background: #475569; transform: scale(1.05); }
+        .mic-btn.recording { background: #ef4444; animation: pulse 1.5s infinite; }
+        .mic-btn.recording:hover { background: #dc2626; }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         .send-btn { width: 50px; height: 50px; border-radius: 50%; background: var(--primary); color: white; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: all 0.2s; }
         .send-btn:hover:not(:disabled) { background: #0ea5e9; transform: scale(1.05); }
         .send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -1132,6 +1253,30 @@
 
         .spending-header {
             margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .camera-header-btn {
+            padding: 10px 20px;
+            border-radius: 10px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .camera-header-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
 
         .spending-header h2 {
