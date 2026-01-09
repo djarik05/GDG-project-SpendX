@@ -11,6 +11,11 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 
+        /* Utility class for hiding elements */
+        .hidden {
+            display: none !important;
+        }
+
         /* Body styles only apply when login view is visible */
         body:has(#login-view:not(.hidden)),
         body.login-active {

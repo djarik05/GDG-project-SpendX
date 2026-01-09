@@ -51,7 +51,7 @@
                 <form id="signup-form" class="hidden" onsubmit="handleLogin(event)">
                     <div class="input-group">
                         <label>Full Name</label>
-                        <input type="text" class="input-field" placeholder="Arjun Patel">
+                        <input type="text" class="input-field" placeholder="User-name">
                     </div>
 
                     <div class="input-group">
@@ -100,18 +100,18 @@
                 <button class="active" onclick="switchTab('dashboard', this)"><i class="ri-dashboard-line"></i> Dashboard</button>
                 <button onclick="switchTab('income', this)"><i class="ri-wallet-3-line"></i> Income</button>
                 <button onclick="switchTab('expenses', this)"><i class="ri-file-list-3-line"></i> Expenses</button>
-                <button onclick="switchTab('insights', this)"><i class="ri-pie-chart-line"></i> Insights</button>
+                
                 <button onclick="switchTab('investments', this)"><i class="ri-line-chart-line"></i> Investments</button>
                 <button onclick="switchTab('emi', this)"><i class="ri-calendar-check-line"></i> EMI / Bills</button>
                 <button onclick="switchTab('goals', this)"><i class="ri-flag-line"></i> Goals</button>
-                <button onclick="switchTab('ask', this)"><i class="ri-message-3-line"></i> Ask Copilot</button>
+                <button onclick="switchTab('ask', this)"><i class="ri-message-3-line"></i> Chatbot</button>
         </nav>
     
     </aside>
 
     <main>
         <header class="header">
-            <h1 id="page-title">Hello <span>Arjun</span>, here's your current month overview.</h1>
+            <h1 id="page-title">Hello <span>User-name</span>, here's your current month overview.</h1>
             <div class="header-right">
                 <button class="message-icon-btn" onclick="switchTab('ask', null)">
                     <i class="ri-message-3-line"></i>
@@ -134,11 +134,10 @@
                         <div class="summary-box">
                             <div class="summary-box-header">
                                 <span class="eyebrow">Monthly</span>
-                                <h4>Monthly Income</h4>
+                                <h4> Income</h4>
                             </div>
                             <div class="summary-box-body">
                                 <div class="summary-row">
-                                    <span>Income</span>
                                     <span class="amount">₹ 30,000</span>
                                 </div>
                             </div>
@@ -147,11 +146,10 @@
                         <div class="summary-box">
                             <div class="summary-box-header">
                                 <span class="eyebrow">Monthly</span>
-                                <h4>Monthly Expenses</h4>
+                                <h4>Expenses</h4>
                             </div>
                             <div class="summary-box-body">
                                 <div class="summary-row">
-                                    <span>Expenses</span>
                                     <span class="amount">₹ 19,000</span>
                                 </div>
                             </div>
@@ -161,10 +159,10 @@
                             <div class="summary-box-header">
                                 <span class="eyebrow">Savings Left</span>
                                 <h4>₹ 11,000</h4>
+
                             </div>
                             <div class="summary-box-body">
                                 <div class="progress-labels">
-                                    <span>Income — Expenses</span>
                                     <span>37% saved</span>
                                 </div>
                                 <div class="progress-bar-bg">
@@ -176,12 +174,12 @@
                         <div class="summary-box">
                             <div class="summary-box-header">
                                 <span class="eyebrow">Total</span>
-                                <h4>Total Investment</h4>
+                                <h4> Investment</h4>
                             </div>
                             <div class="summary-box-body">
                                 <div class="summary-row">
-                                    <span>Investments</span>
-                                    <span class="amount">₹ 2,75,000</span>
+                                    
+                                    <span class="amount">₹2,75,000</span>
                                 </div>
                             </div>
                         </div>
@@ -193,6 +191,7 @@
                     <button class="action-btn btn-track" onclick="switchTab('ask', null, 'Track expenses')"><i class="ri-file-list-3-line"></i> Track expenses</button>
                     <button class="action-btn btn-invest" onclick="switchTab('ask', null, 'Where to invest?')"><i class="ri-lightbulb-line"></i> Investment tips</button>
                     <button class="action-btn btn-emi" onclick="switchTab('ask', null, 'Can I afford EMI?')"><i class="ri-calendar-check-line"></i> Plan for EMI</button>
+                    <button class="action-btn btn-reset" onclick="resetIncomeAndExpenses()"><i class="ri-refresh-line"></i> Reset Data</button>
                 </div>
 
                 <!-- FINANCIAL GOALS -->
@@ -265,7 +264,7 @@
                 </div>
             </div>
 
-            <!-- RIGHT COLUMN: ASK FIN GUIDE AI -->
+            <!-- RIGHT COLUMN: ASK SpendX AI -->
             <div class="dash-right">
                 <div class="card ask-card">
                     <p class="eyebrow">Ask SpendX AI</p>
@@ -281,22 +280,20 @@
                         Can I afford a ₹5,000 SIP?
                     </button>
 
-                    <div class="ask-ai-reply">
+                    <div class="ask-ai-reply" id="dashboard-ai-reply">
                         <div class="reply-header">
                             <span class="ai-name">Gemini</span>
                         </div>
-                        <p class="reply-text">
-                            Sure! Based on your ₹ 30,000 income and ₹ 19,000 expenses, yes, you can afford a ₹ 5,000 SIP.
-                        </p>
-                        <ul class="reply-points">
-                            <li>After SIP, you'll have ₹ 6,000 leftover. Good cushion for savings!</li>
-                            <li>SIP is a smart way to grow your money long term, try sticking to it.</li>
-                        </ul>
-                        <div class="status-badge" style="margin-top:10px;">Yes, a ₹ 5,000 SIP is a Good Move!</div>
+                        <div class="reply-body">
+                            <p class="reply-text">Hi 👋<br>I'm SpendX AI, your personal finance copilot.<br>Ask me anything about money, savings, SIPs, investments, budgeting, or financial planning!</p>
+                        </div>
                     </div>
 
                     <div class="ask-input-mini">
                         <input type="text" placeholder="Ask me anything..." />
+                        <button class="mic-btn-mini" onclick="startSpeechRecognitionMini(this)" title="Start voice input">
+                            <i class="ri-mic-line"></i>
+                        </button>
                         <button><i class="ri-send-plane-fill"></i></button>
                     </div>
                 </div>
@@ -315,7 +312,10 @@
 
             <div class="chat-input-area">
                 <input type="text" id="user-input" class="chat-input" placeholder="Ask anything..." onkeypress="handleEnter(event)">
-                <button class="send-btn" onclick="sendMessage()"><i class="ri-send-plane-fill"></i></button>
+                <button class="mic-btn" id="main-mic-btn" onclick="startSpeechRecognition('user-input')" title="Start voice input">
+                    <i class="ri-mic-line"></i>
+                </button>
+                <button class="send-btn" onclick="document.getElementById('user-input').dataset.source='chat'; sendMessage();"><i class="ri-send-plane-fill"></i></button>
             </div>
         </div>
 
@@ -325,14 +325,14 @@
                 <div class="insights-main-content">
                     <!-- Page Header -->
                     <div class="insights-page-header">
-                        <h2>Insights</h2>
+                        <h2></h2>
                         <p class="subtitle">Your Money Overview</p>
                     </div>
 
                     <!-- Introductory Card -->
                     <div class="card insights-intro-card">
                         <div class="intro-card-content">
-                            <div class="robot-icon-small">🤖</div>
+                            
                             <p>Here's a snapshot of your finances. Let's make sure you end the month on a strong note! 🚀</p>
                         </div>
                     </div>
@@ -437,7 +437,7 @@
                     <div class="card ask-card">
                         <p class="eyebrow">Ask SpendX AI</p>
                         <div class="ai-robot">
-                            <div class="robot-icon">🤖</div>
+                            
                         </div>
                         <h3>Ask SpendX AI</h3>
                         <p class="subtitle">Ask anything, I'm here to help!</p>
@@ -451,18 +451,13 @@
                             Can I afford a ₹5,000 SIP?
                         </button>
 
-                        <div class="ask-ai-reply">
+                        <div class="ask-ai-reply" id="insights-ai-reply">
                             <div class="reply-header">
-                                <span class="ai-name">SpendX</span>
+                                <span class="ai-name">Gemini</span>
                             </div>
-                            <p class="reply-text">
-                                Sure! Based on your ₹ 30,000 income and ₹ 19,000 expenses, yes, you can afford a ₹ 5,000 SIP.
-                            </p>
-                            <ul class="reply-points">
-                                <li>After SIP, you'll have ₹ 6,000 leftover. Good cushion for savings!</li>
-                                <li>SIP is a smart way to grow your money long term, try sticking to it.</li>
-                            </ul>
-                            <div class="status-badge" style="margin-top:10px;">Yes, a ₹ 5,000 SIP is a Good Move!</div>
+                            <div class="reply-body">
+                                <p class="reply-text">Hi 👋<br>I'm SpendX AI, your personal finance copilot.<br>Ask me anything about money, savings, SIPs, investments, budgeting, or financial planning!</p>
+                            </div>
                         </div>
 
                         <div class="ask-input-mini">
@@ -481,20 +476,20 @@
                     <h2>Spending</h2>
                     <p class="subtitle">Your Expense Breakdown</p>
                 </div>
+                <button class="camera-header-btn" onclick="openCameraModal()" title="Scan Bill with Camera">
+                    <i class="ri-camera-line"></i> Scan Bill
+                </button>
             </div>
 
             <div class="spending-subnav">
                 <button class="subnav-btn">Overview</button>
-                <button class="subnav-btn active">Categories</button>
-                <button class="subnav-btn">Trends</button>
-                <button class="subnav-btn">Merchants <i class="ri-arrow-right-s-line"></i></button>
             </div>
 
             <div class="spending-content-grid">
                 <div class="spending-main">
                     <!-- Expense Summary Section -->
                     <div class="card spending-summary-card">
-                        <div class="card-head" style="margin-bottom: 20px; display: none;">
+                        <div class="card-head" style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
                             <h3 style="margin: 0;">Expense Summary</h3>
                             <button class="add-btn" onclick="openAddExpenseModal()">
                                 <i class="ri-add-line"></i> Add Expense
@@ -657,7 +652,7 @@
                         </div>
                         <p class="eyebrow">Ask SpendX AI</p>
                         <div class="ai-robot">
-                            <div class="robot-icon">🤖</div>
+                           
                         </div>
                         <h3>Ask SpendX AI</h3>
                         <p class="subtitle">Ask anything, I'm here to help!</p>
@@ -668,7 +663,7 @@
                             <button class="pill blue" onclick="switchTab('ask', null, 'Can I afford a ₹5,000 SIP?')">Can I afford a ₹5,000 SIP?</button>
                         </div>
 
-                        <div class="ask-chat-history">
+                        <div class="ask-chat-history" id="expenses-chat-history" style="display: none;">
                             <div class="chat-history-header-item">
                                 <div class="gemini-header">
                                     <span class="gemini-icon">G</span>
@@ -699,6 +694,15 @@
                             </div>
                         </div>
 
+                        <div class="ask-ai-reply" id="expenses-ai-reply">
+                            <div class="reply-header">
+                                <span class="ai-name">Gemini</span>
+                            </div>
+                            <div class="reply-body">
+                                <p class="reply-text">Hi 👋<br>I'm SpendX AI, your personal finance copilot.<br>Ask me anything about money, savings, SIPs, investments, budgeting, or financial planning!</p>
+                            </div>
+                        </div>
+
                         <div class="ask-input-mini">
                             <input type="text" placeholder="Ask me anything..." />
                             <button><i class="ri-send-plane-fill"></i></button>
@@ -718,10 +722,7 @@
             </div>
 
             <div class="income-subnav">
-                <button class="subnav-btn">Overview</button>
-                <button class="subnav-btn active">Sources</button>
-                <button class="subnav-btn">Tracker</button>
-                <button class="subnav-btn">Category <i class="ri-arrow-right-s-line"></i></button>
+                
             </div>
 
             <div class="income-content-grid">
@@ -855,7 +856,7 @@
                         </div>
                         <p class="eyebrow">Ask FinGuide AI</p>
                         <div class="ai-robot">
-                            <div class="robot-icon">🤖</div>
+                           
                         </div>
                         <h3>Ask SpendX AI</h3>
                         <p class="subtitle">Ask anything, I'm here to help!</p>
@@ -869,7 +870,7 @@
                             Can I afford a ₹5,000 SIP?
                         </button>
 
-                        <div class="ask-chat-history">
+                        <div class="ask-chat-history" id="income-chat-history" style="display: none;">
                             <div class="chat-history-item">
                                 <div class="chat-history-header">
                                     <span class="ai-name">SpendX</span>
@@ -899,6 +900,15 @@
                                     <span class="strikethrough">₹2,000</span>
                                     <span class="date">April 18, April</span>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="ask-ai-reply" id="income-ai-reply">
+                            <div class="reply-header">
+                                <span class="ai-name">Gemini</span>
+                            </div>
+                            <div class="reply-body">
+                                <p class="reply-text">Hi 👋<br>I'm SpendX AI, your personal finance copilot.<br>Ask me anything about money, savings, SIPs, investments, budgeting, or financial planning!</p>
                             </div>
                         </div>
 
@@ -940,7 +950,7 @@
                                     <i class="ri-rocket-line"></i>
                                     <span>+ ₹15,000 last month (up 6%)</span>
                                 </div>
-                                <p class="motivational-text">Great going, Arjun!</p>
+                                <p class="motivational-text">Great going, User-name!</p>
                             </div>
                             <div class="investments-chart-section">
                                 <div class="investments-chart-container">
@@ -1059,7 +1069,7 @@
                         </div>
                         <p class="eyebrow">Ask SpendX AI</p>
                         <div class="ai-robot">
-                            <div class="robot-icon">🤖</div>
+                           
                         </div>
                         <h3>Ask SpendX AI</h3>
                         <p class="subtitle">Ask anything, I'm here to help!</p>
@@ -1078,7 +1088,7 @@
                             </button>
                         </div>
 
-                        <div class="ask-chat-history">
+                        <div class="ask-chat-history" id="investments-chat-history" style="display: none;">
                             <div class="chat-history-header-item">
                                 <div class="gemini-header">
                                     <span class="gemini-icon">G</span>
@@ -1119,6 +1129,15 @@
                                     <p>₹5,000</p>
                                     <span class="date">March 31, "SIPs"</span>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="ask-ai-reply" id="investments-ai-reply">
+                            <div class="reply-header">
+                                <span class="ai-name">Gemini</span>
+                            </div>
+                            <div class="reply-body">
+                                <p class="reply-text">Hi 👋<br>I'm SpendX AI, your personal finance copilot.<br>Ask me anything about money, savings, SIPs, investments, budgeting, or financial planning!</p>
                             </div>
                         </div>
 
@@ -1332,7 +1351,7 @@
                     </div>
                 </div>
 
-                <!-- Right Panel - Ask FinGuide AI -->
+                <!-- Right Panel - Ask SpendX AI -->
                 <div class="emi-right">
                     <div class="card ask-card">
                         <div class="ask-header-icons">
@@ -1340,7 +1359,7 @@
                         </div>
                         <p class="eyebrow">Ask SpendX AI</p>
                         <div class="ai-robot">
-                            <div class="robot-icon">🤖</div>
+                           
                         </div>
                         <h3>Ask SpendX AI</h3>
                         <p class="subtitle">Ask anything, I'm here to help!</p>
@@ -1359,7 +1378,7 @@
                             </button>
                         </div>
 
-                        <div class="ask-chat-history">
+                        <div class="ask-chat-history" id="emi-chat-history" style="display: none;">
                             <div class="chat-history-header-item">
                                 <div class="gemini-header">
                                     <span class="gemini-icon">G</span>
@@ -1395,6 +1414,15 @@
                                     <p>₹1,000</p>
                                     <span class="date">12 days, Bills</span>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="ask-ai-reply" id="emi-ai-reply">
+                            <div class="reply-header">
+                                <span class="ai-name">Gemini</span>
+                            </div>
+                            <div class="reply-body">
+                                <p class="reply-text">Hi 👋<br>I'm SpendX AI, your personal finance copilot.<br>Ask me anything about money, savings, SIPs, investments, budgeting, or financial planning!</p>
                             </div>
                         </div>
 
@@ -1488,7 +1516,7 @@
                                 <div class="goal-details">
                                     <div class="goal-header-row">
                                         <h4>Emergency Fund</h4>
-                                        <span class="goal-badge over-completed">120% Completed</span>
+                                        <span class="goal-badge over-completed">80% Completed</span>
                                     </div>
                                     <p class="goal-description">Upcoming Trip Savs</p>
                                     <div class="goal-amount-row">
@@ -1499,9 +1527,9 @@
                                     </div>
                                     <div class="goal-progress-section">
                                         <div class="goal-progress-bar over-completed-bar">
-                                            <div class="goal-progress-fill over-completed" style="width: 120%;"></div>
+                                            <div class="goal-progress-fill over-completed" style="width: 80%;"></div>
                                         </div>
-                                        <span class="goal-progress-label">120%</span>
+                                        <span class="goal-progress-label">80%</span>
                                     </div>
                                 </div>
                             </div>
@@ -1523,12 +1551,12 @@
                         </div>
                         <p class="eyebrow">Ask SpendX AI</p>
                         <div class="ai-robot">
-                            <div class="robot-icon">🤖</div>
+                            
                         </div>
                         <h3>Ask SpendX AI</h3>
                         <p class="subtitle">Ask anything, I'm here to help!</p>
 
-                        <div class="goals-suggestions-list">
+                        <div class="goals-suggestions-list" id="goals-suggestions-list" style="display: none;">
                             <!-- Emergency Fund Suggestion -->
                             <div class="goal-suggestion-card">
                                 <div class="goal-suggestion-icon bg-green-light">
@@ -1567,6 +1595,15 @@
                                         <span class="goal-suggestion-percentage">6%</span>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="ask-ai-reply" id="goals-ai-reply">
+                            <div class="reply-header">
+                                <span class="ai-name">Gemini</span>
+                            </div>
+                            <div class="reply-body">
+                                <p class="reply-text">Hi 👋<br>I'm SpendX AI, your personal finance copilot.<br>Ask me anything about money, savings, SIPs, investments, budgeting, or financial planning!</p>
                             </div>
                         </div>
 
@@ -1851,7 +1888,12 @@
                     </div>
                     <div class="form-group">
                         <label>Amount (₹)</label>
-                        <input type="number" name="expenseAmount" placeholder="0" min="0" step="0.01" required>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <input type="number" name="expenseAmount" id="expenseAmount" placeholder="0" min="0" step="0.01" required style="flex: 1;">
+                            <button type="button" class="camera-btn" onclick="openCameraModal()" title="Scan Bill with Camera">
+                                <i class="ri-camera-line"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="modal-actions">
                         <button type="button" class="btn-cancel" onclick="closeAddExpenseModal()">Cancel</button>
@@ -1861,8 +1903,104 @@
             </div>
         </div>
 
+        <!-- Tesseract.js for OCR -->
+        <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
+        
         <!-- Chart.js for Insights Graph -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        
+        <!-- Camera Bill Scanner Modal -->
+        <div id="cameraModal" class="modal" style="display: none;">
+            <div class="modal-content" style="max-width: 600px;">
+                <div class="modal-header">
+                    <h3>Scan Bill with Camera</h3>
+                    <button class="modal-close" onclick="closeCameraModal()">
+                        <i class="ri-close-line"></i>
+                    </button>
+                </div>
+                <div class="camera-container" style="padding: 20px;">
+                    <div id="camera-preview" style="width: 100%; background: #000; border-radius: 8px; overflow: hidden; margin-bottom: 15px; position: relative; min-height: 300px; display: flex; align-items: center; justify-content: center;">
+                        <video id="camera-video" autoplay playsinline style="width: 100%; max-height: 400px; display: none;"></video>
+                        <canvas id="camera-canvas" style="display: none;"></canvas>
+                        <div id="camera-placeholder" style="color: #fff; text-align: center; padding: 20px;">
+                            <i class="ri-camera-line" style="font-size: 3rem; margin-bottom: 10px; display: block;"></i>
+                            <p>Camera will appear here</p>
+                        </div>
+                        <div id="captured-image-preview" style="display: none; width: 100%;">
+                            <img id="captured-img" style="width: 100%; max-height: 400px; object-fit: contain;" alt="Captured bill">
+                        </div>
+                    </div>
+                    
+                    <div id="camera-controls" style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
+                        <button id="start-camera-btn" class="btn-primary" onclick="startCamera()">
+                            <i class="ri-camera-line"></i> Start Camera
+                        </button>
+                        <button id="capture-btn" class="btn-primary" onclick="captureBill()" style="display: none;">
+                            <i class="ri-camera-fill"></i> Capture
+                        </button>
+                        <button id="retake-btn" class="btn-secondary" onclick="retakePhoto()" style="display: none;">
+                            <i class="ri-refresh-line"></i> Retake
+                        </button>
+                    </div>
+                    
+                    <div id="processing-status" style="display: none; text-align: center; padding: 15px; background: #f0f9ff; border-radius: 8px; margin-bottom: 15px;">
+                        <div class="loading-spinner" style="display: inline-block; width: 20px; height: 20px; border: 3px solid #3b82f6; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 10px;"></div>
+                        <span id="processing-text">Processing image...</span>
+                    </div>
+                    
+                    <div id="extracted-data" style="display: none; padding: 15px; background: #f8fafc; border-radius: 8px; margin-bottom: 15px;">
+                        <h4 style="margin: 0 0 10px 0; font-size: 0.9rem; color: #64748b;">Extracted Information:</h4>
+                        <div id="extracted-content" style="font-size: 0.85rem; color: #334155;"></div>
+                    </div>
+                    
+                    <div class="modal-actions">
+                        <button type="button" class="btn-cancel" onclick="closeCameraModal()">Cancel</button>
+                        <button id="use-extracted-btn" type="button" class="btn-submit" onclick="useExtractedData()" style="display: none;">
+                            <i class="ri-check-line"></i> Use This Data
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <style>
+            @keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+            .camera-btn {
+                width: 45px;
+                height: 45px;
+                border-radius: 8px;
+                background: var(--primary);
+                color: white;
+                border: none;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
+                transition: all 0.2s;
+            }
+            .camera-btn:hover {
+                background: #1d4ed8;
+                transform: scale(1.05);
+            }
+            .btn-secondary {
+                padding: 10px 20px;
+                border-radius: 8px;
+                background: #64748b;
+                color: white;
+                border: none;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                transition: all 0.2s;
+            }
+            .btn-secondary:hover {
+                background: #475569;
+            }
+        </style>
         <script>
             // Handle custom category toggle
             document.getElementById('expenseCategory')?.addEventListener('change', function() {
