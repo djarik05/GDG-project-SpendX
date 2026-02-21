@@ -1,5 +1,6 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,7 @@
     <script src="login.js"></script>
     <script src="backend.js"></script>
 </head>
+
 <body>
 
     <!-- LOGIN VIEW -->
@@ -22,10 +24,10 @@
             <div class="auth-card">
                 <div class="logo-area">
                     <div class="logo-icon"></div>
-                   SpendX AI
+                    SpendX AI
                 </div>
                 <p class="tagline">Your Personal Finance Copilot</p>
-                
+
                 <img src="money.png" alt="AI Robot" class="mascot-img">
 
                 <h2 id="form-title">Welcome back!</h2>
@@ -39,13 +41,14 @@
                     <div class="input-group">
                         <label>Password</label>
                         <div class="input-wrapper">
-                            <input type="password" id="login-pass" class="input-field" placeholder="••••••••••••" required>
+                            <input type="password" id="login-pass" class="input-field" placeholder="••••••••••••"
+                                required>
                             <i class="ri-eye-off-line toggle-password" onclick="togglePassword('login-pass', this)"></i>
                         </div>
                         <a href="#" class="forgot-link">Forgot password?</a>
                     </div>
 
-                    <button type="submit" class="btn-primary" >Log In</button>
+                    <button type="submit" class="btn-primary">Log In</button>
                 </form>
 
                 <form id="signup-form" class="hidden" onsubmit="handleLogin(event)">
@@ -63,7 +66,8 @@
                         <label>Create Password</label>
                         <div class="input-wrapper">
                             <input type="password" id="signup-pass" class="input-field" placeholder="Create a password">
-                            <i class="ri-eye-off-line toggle-password" onclick="togglePassword('signup-pass', this)"></i>
+                            <i class="ri-eye-off-line toggle-password"
+                                onclick="togglePassword('signup-pass', this)"></i>
                         </div>
                     </div>
 
@@ -91,1735 +95,1174 @@
     <!-- DASHBOARD VIEW -->
     <div id="dashboard-app" class="dashboard-app hidden">
 
-    <aside>
+        <aside>
             <div class="logo">
                 <div class="logo-mark"></div>
                 SpendX AI
             </div>
-        <nav class="nav-links">
-                <button class="active" onclick="switchTab('dashboard', this)"><i class="ri-dashboard-line"></i> Dashboard</button>
+            <nav class="nav-links">
+                <button class="active" onclick="switchTab('dashboard', this)"><i class="ri-dashboard-line"></i>
+                    Dashboard</button>
                 <button onclick="switchTab('income', this)"><i class="ri-wallet-3-line"></i> Income</button>
                 <button onclick="switchTab('expenses', this)"><i class="ri-file-list-3-line"></i> Expenses</button>
-                
+                <button onclick="switchTab('insights', this)"><i class="ri-pie-chart-2-line"></i> Insights</button>
                 <button onclick="switchTab('investments', this)"><i class="ri-line-chart-line"></i> Investments</button>
                 <button onclick="switchTab('emi', this)"><i class="ri-calendar-check-line"></i> EMI / Bills</button>
                 <button onclick="switchTab('goals', this)"><i class="ri-flag-line"></i> Goals</button>
                 <button onclick="switchTab('ask', this)"><i class="ri-message-3-line"></i> Chatbot</button>
-        </nav>
-    
-    </aside>
+            </nav>
 
-    <main>
-        <header class="header">
-            <h1 id="page-title">Hello <span>User-name</span>, here's your current month overview.</h1>
-            <div class="header-right">
-                <button class="message-icon-btn" onclick="switchTab('ask', null)">
-                    <i class="ri-message-3-line"></i>
-                </button>
-                <div class="user-profile" onclick="switchTab('profile', null)">
-                    <div class="user-info">
-                        <h4>User-name</h4>
-                        <p>user-email@mail.com</p>
-                    </div>
-                    <img src="user.png.png" alt="User" class="avatar" style="cursor: pointer;">
-                </div>
-            </div>
-        </header>
+        </aside>
 
-        <div id="dashboard-view" class="dashboard-view">
-            <div class="dash-left">
-                <!-- TOP SUMMARY STRIP -->
-                <div class="card dash-summary-strip">
-                    <div class="summary-grid">
-                        <div class="summary-box">
-                            <div class="summary-box-header">
-                                <span class="eyebrow">Monthly</span>
-                                <h4> Income</h4>
-                            </div>
-                            <div class="summary-box-body">
-                                <div class="summary-row">
-                                    <span class="amount">₹ 30,000</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="summary-box">
-                            <div class="summary-box-header">
-                                <span class="eyebrow">Monthly</span>
-                                <h4>Expenses</h4>
-                            </div>
-                            <div class="summary-box-body">
-                                <div class="summary-row">
-                                    <span class="amount">₹ 19,000</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="summary-box savings-box">
-                            <div class="summary-box-header">
-                                <span class="eyebrow">Savings Left</span>
-                                <h4>₹ 11,000</h4>
-
-                            </div>
-                            <div class="summary-box-body">
-                                <div class="progress-labels">
-                                    <span>37% saved</span>
-                                </div>
-                                <div class="progress-bar-bg">
-                                    <div class="progress-bar-fill"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="summary-box">
-                            <div class="summary-box-header">
-                                <span class="eyebrow">Total</span>
-                                <h4> Investment</h4>
-                            </div>
-                            <div class="summary-box-body">
-                                <div class="summary-row">
-                                    
-                                    <span class="amount">₹2,75,000</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- QUICK ACTIONS -->
-                <div class="quick-actions">
-                    <button class="action-btn btn-track" onclick="switchTab('ask', null, 'Track expenses')"><i class="ri-file-list-3-line"></i> Track expenses</button>
-                    <button class="action-btn btn-invest" onclick="switchTab('ask', null, 'Where to invest?')"><i class="ri-lightbulb-line"></i> Investment tips</button>
-                    <button class="action-btn btn-emi" onclick="switchTab('ask', null, 'Can I afford EMI?')"><i class="ri-calendar-check-line"></i> Plan for EMI</button>
-                    <button class="action-btn btn-reset" onclick="resetIncomeAndExpenses()"><i class="ri-refresh-line"></i> Reset Data</button>
-                </div>
-
-                <!-- FINANCIAL GOALS -->
-                <div class="card dash-goals">
-                    <div class="card-head">
-                        <h3>Financial Goals</h3>
-                        <a class="link">View All</a>
-                    </div>
-
-                    <div class="goal-item">
-                        <div class="goal-left">
-                            <div class="status-dot success"></div>
-                            <div>
-                                <h4>₹5,000 Monthly SIP</h4>
-                                <p>4/5 deposited instalments</p>
-                            </div>
-                        </div>
-                        <div class="goal-right">70%</div>
-                    </div>
-                    <div class="progress-bar-bg slim">
-                        <div class="progress-bar-fill" style="width:70%;"></div>
-                    </div>
-
-                    <div class="goal-item" style="margin-top:16px;">
-                        <div class="goal-left">
-                            <div class="status-dot info"></div>
-                            <div>
-                                <h4>Trip Fund</h4>
-                                <p>₹20,000 saved</p>
-                            </div>
-                        </div>
-                        <button class="add-goal-inline">+ Add Goal</button>
-                    </div>
-                </div>
-
-                <!-- UPCOMING PAYMENTS -->
-                <div class="card dash-upcoming">
-                    <div class="card-head">
-                        <h3>Upcoming Payments</h3>
-                        <a class="link">View All</a>
-                    </div>
-
-                    <div class="payment-item">
-                        <div class="payment-left">
-                            <div class="icon-box bg-yellow"><i class="ri-amazon-fill"></i></div>
-                            <div class="payment-info">
-                                <h5>Amazon Card</h5>
-                                <span>3 days. Due</span>
-                            </div>
-                        </div>
-                        <div class="payment-right">
-                            <h5>₹ 1,500</h5>
-                            <span>₹ 1,500</span>
-                        </div>
-                    </div>
-
-                    <div class="payment-item">
-                        <div class="payment-left">
-                            <div class="icon-box bg-blue"><i class="ri-netflix-fill"></i></div>
-                            <div class="payment-info">
-                                <h5>Netflix</h5>
-                                <span>5 days. Due</span>
-                            </div>
-                        </div>
-                        <div class="payment-right">
-                            <h5>₹ 500</h5>
-                            <span>₹ 500</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- RIGHT COLUMN: ASK SpendX AI -->
-            <div class="dash-right">
-                <div class="card ask-card">
-                    <p class="eyebrow">Ask SpendX AI</p>
-                    <h3>Ask SpendX AI</h3>
-                    <p class="subtitle">Ask anything, I'm here to help!</p>
-
-                    <div class="ask-suggestions">
-                        <button class="pill ghost" onclick="switchTab('ask', null, 'Where to invest?')">Where to invest?</button>
-                        <button class="pill ghost" onclick="switchTab('ask', null, 'Track expenses')">Track expenses</button>
-                    </div>
-
-                    <button class="ask-primary" onclick="switchTab('ask', null, 'Can I afford a ₹5,000 SIP?')">
-                        Can I afford a ₹5,000 SIP?
+        <main>
+            <header class="header">
+                <h1 id="page-title">Hello <span>User-name</span>, here's your current month overview.</h1>
+                <div class="header-right">
+                    <button class="message-icon-btn" onclick="switchTab('ask', null)">
+                        <i class="ri-message-3-line"></i>
                     </button>
-
-                    <div class="ask-ai-reply" id="dashboard-ai-reply">
-                        <div class="reply-header">
-                            <span class="ai-name">Gemini</span>
+                    <div class="user-profile" onclick="switchTab('profile', null)">
+                        <div class="user-info">
+                            <h4>User-name</h4>
+                            <p>user-email@mail.com</p>
                         </div>
-                        <div class="reply-body">
-                            <p class="reply-text">Hi 👋<br>I'm SpendX AI, your personal finance copilot.<br>Ask me anything about money, savings, SIPs, investments, budgeting, or financial planning!</p>
-                        </div>
-                    </div>
-
-                    <div class="ask-input-mini">
-                        <input type="text" placeholder="Ask me anything..." />
-                        <button class="mic-btn-mini" onclick="startSpeechRecognitionMini(this)" title="Start voice input">
-                            <i class="ri-mic-line"></i>
-                        </button>
-                        <button><i class="ri-send-plane-fill"></i></button>
+                        <img src="user.png.png" alt="User" class="avatar" style="cursor: pointer;">
                     </div>
                 </div>
-            </div>
-        </div>
+            </header>
 
-        <div id="ask-view" class="chat-view">
-            <div class="chat-container" id="chat-history">
-                <div class="message msg-ai">
-                    <strong>SpendX AI</strong><br>
-                    Hi User-name! I'm your finance copilot. Based on your ₹30,000 income, ask me anything! <br><br>
-                    Try asking: <br>
-                    <span style="color:var(--primary); cursor:pointer;">"Can I afford a ₹5,000 SIP?"</span>
-                </div>
-            </div>
-
-            <div class="chat-input-area">
-                <input type="text" id="user-input" class="chat-input" placeholder="Ask anything..." onkeypress="handleEnter(event)">
-                <button class="mic-btn" id="main-mic-btn" onclick="startSpeechRecognition('user-input')" title="Start voice input">
-                    <i class="ri-mic-line"></i>
-                </button>
-                <button class="send-btn" onclick="document.getElementById('user-input').dataset.source='chat'; sendMessage();"><i class="ri-send-plane-fill"></i></button>
-            </div>
-        </div>
-
-        <!-- INSIGHTS VIEW -->
-        <div id="insights-view" class="insights-view">
-            <div class="insights-content-wrapper">
-                <div class="insights-main-content">
-                    <!-- Page Header -->
-                    <div class="insights-page-header">
-                        <h2></h2>
-                        <p class="subtitle">Your Money Overview</p>
-                    </div>
-
-                    <!-- Introductory Card -->
-                    <div class="card insights-intro-card">
-                        <div class="intro-card-content">
-                            
-                            <p>Here's a snapshot of your finances. Let's make sure you end the month on a strong note! 🚀</p>
-                        </div>
-                    </div>
-
-                    <!-- Savings Summary Section -->
-                    <div class="card insights-savings-card">
-                        <h3 class="savings-title">You saved 37% of your income this month! 👍</h3>
-                        
-                        <!-- Income Section -->
-                        <div class="insight-metric-box">
-                            <div class="metric-header">
-                                <span class="metric-label">Income</span>
-                                <span class="metric-value">₹ 30,000</span>
-                            </div>
-                            <div class="metric-breakdown-bar">
-                                <div class="bar-segment expenses-segment" style="width: 63.33%;">
-                                    <span class="segment-label">₹ 19,000</span>
+            <div id="dashboard-view" class="dashboard-view">
+                <div class="dash-left">
+                    <!-- TOP SUMMARY STRIP -->
+                    <div class="card dash-summary-strip">
+                        <div class="summary-grid">
+                            <div class="summary-box">
+                                <div class="summary-box-header">
+                                    <span class="eyebrow">Monthly</span>
+                                    <h4> Income</h4>
                                 </div>
-                                <div class="bar-segment savings-segment" style="width: 36.67%;">
-                                    <span class="segment-label">₹ 11,000</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Expenses Section -->
-                        <div class="insight-metric-box">
-                            <div class="metric-header">
-                                <span class="metric-label">Expenses</span>
-                                <span class="metric-value">₹ 19,000</span>
-                            </div>
-                            <div class="metric-breakdown-bar">
-                                <div class="bar-segment expenses-segment" style="width: 50%;">
-                                    <span class="segment-label">₹ 5,000</span>
-                                </div>
-                                <div class="bar-segment savings-segment" style="width: 50%;">
-                                    <span class="segment-label">₹ 5,000</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Track EMI Section -->
-                    <div class="card insights-track-emi-card">
-                        <div class="track-emi-content">
-                            <div class="track-emi-icon">
-                                <i class="ri-checkbox-circle-line"></i>
-                            </div>
-                            <div class="track-emi-text">
-                                <h4>Track EMI</h4>
-                                <p>Consider boosting your SIP or starting a small FD. Compound interest can grow your savings! 🚀</p>
-                                <button class="track-emi-btn" onclick="switchTab('emi', null)">Track EMI</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Good Spending Habits Section -->
-                    <div class="card insights-habits-card">
-                        <div class="habits-content">
-                            <div class="habits-icon">
-                                <i class="ri-checkbox-circle-line"></i>
-                            </div>
-                            <div class="habits-text">
-                                <h4>Good Spending Habits</h4>
-                                <p>Most of your spending was on needs, not wants. You're keeping a balance, nice work! 🎉</p>
-                                
-                                <div class="habits-breakdown">
-                                    <div class="habit-item">
-                                        <div class="habit-header">
-                                            <span>Essentials ₹ 12,000</span>
-                                            <span class="habit-percentage">63%</span>
-                                        </div>
-                                        <div class="habit-bar">
-                                            <div class="habit-bar-fill" style="width: 63%;"></div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="habit-item">
-                                        <div class="habit-header">
-                                            <span>Wants ₹ 5,000</span>
-                                            <span class="habit-percentage">11%</span>
-                                        </div>
-                                        <div class="habit-bar">
-                                            <div class="habit-bar-fill wants" style="width: 11%;"></div>
-                                        </div>
+                                <div class="summary-box-body">
+                                    <div class="summary-row">
+                                        <span class="amount">₹ 0</span>
                                     </div>
                                 </div>
-                                
-                                <div class="habits-labels">
-                                    <span>&lt;60% Needs</span>
-                                    <span>&lt;30% Wants</span>
-                                    <span>&gt;10% Investing</span>
-                                </div>
-                                
-                                <button class="track-expenses-btn" onclick="switchTab('expenses', null)">Track expenses →</button>
                             </div>
+
+                            <div class="summary-box">
+                                <div class="summary-box-header">
+                                    <span class="eyebrow">Monthly</span>
+                                    <h4>Expenses</h4>
+                                </div>
+                                <div class="summary-box-body">
+                                    <div class="summary-row">
+                                        <span class="amount">₹ 0</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="summary-box savings-box">
+                                <div class="summary-box-header">
+                                    <span class="eyebrow">Savings Left</span>
+                                    <h4>₹ 0</h4>
+
+                                </div>
+                                <div class="summary-box-body">
+                                    <div class="progress-labels">
+                                        <span>0% saved</span>
+                                    </div>
+                                    <div class="progress-bar-bg">
+                                        <div class="progress-bar-fill" style="width: 0%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="summary-box">
+                                <div class="summary-box-header">
+                                    <span class="eyebrow">Total</span>
+                                    <h4> Investment</h4>
+                                </div>
+                                <div class="summary-box-body">
+                                    <div class="summary-row">
+
+                                        <span class="amount">₹ 0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- QUICK ACTIONS -->
+                    <div class="quick-actions">
+                        <button class="action-btn btn-track" onclick="switchTab('ask', null, 'Track expenses')"><i
+                                class="ri-file-list-3-line"></i> Track expenses</button>
+                        <button class="action-btn btn-invest" onclick="switchTab('ask', null, 'Where to invest?')"><i
+                                class="ri-lightbulb-line"></i> Investment tips</button>
+                        <button class="action-btn btn-emi" onclick="switchTab('ask', null, 'Can I afford EMI?')"><i
+                                class="ri-calendar-check-line"></i> Plan for EMI</button>
+                        <button class="action-btn btn-reset" onclick="resetIncomeAndExpenses()"><i
+                                class="ri-refresh-line"></i> Reset Data</button>
+                    </div>
+
+                    <!-- FINANCIAL GOALS -->
+                    <div class="card dash-goals">
+                        <div class="card-head">
+                            <h3>Financial Goals</h3>
+                            <a class="link">View All</a>
+                        </div>
+                        <div style="padding: 20px; text-align: center; color: var(--text-muted);">
+                            <p>No goals set yet.</p>
+                            <button class="add-goal-inline" style="margin-top: 10px;">+ Add Goal</button>
+                        </div>
+                    </div>
+
+                    <!-- UPCOMING PAYMENTS -->
+                    <div class="card dash-upcoming">
+                        <div class="card-head">
+                            <h3>Upcoming Payments</h3>
+                            <a class="link">View All</a>
+                        </div>
+                        <div style="padding: 20px; text-align: center; color: var(--text-muted);">
+                            <p>No upcoming payments.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right Sidebar - Ask FinGuide AI -->
-                <div class="insights-right-sidebar">
+                <!-- RIGHT COLUMN: ASK SpendX AI -->
+                <div class="dash-right">
                     <div class="card ask-card">
                         <p class="eyebrow">Ask SpendX AI</p>
-                        <div class="ai-robot">
-                            
-                        </div>
                         <h3>Ask SpendX AI</h3>
                         <p class="subtitle">Ask anything, I'm here to help!</p>
 
                         <div class="ask-suggestions">
-                            <button class="pill ghost" onclick="switchTab('ask', null, 'Where to invest?')">Where to invest?</button>
-                            <button class="pill ghost" onclick="switchTab('ask', null, 'Track expenses')">Track expenses</button>
+                            <button class="pill ghost" onclick="switchTab('ask', null, 'Where to invest?')">Where to
+                                invest?</button>
+                            <button class="pill ghost" onclick="switchTab('ask', null, 'Track expenses')">Track
+                                expenses</button>
                         </div>
 
                         <button class="ask-primary" onclick="switchTab('ask', null, 'Can I afford a ₹5,000 SIP?')">
                             Can I afford a ₹5,000 SIP?
                         </button>
 
-                        <div class="ask-ai-reply" id="insights-ai-reply">
+                        <div class="ask-ai-reply" id="dashboard-ai-reply">
                             <div class="reply-header">
                                 <span class="ai-name">Gemini</span>
                             </div>
                             <div class="reply-body">
-                                <p class="reply-text">Hi 👋<br>I'm SpendX AI, your personal finance copilot.<br>Ask me anything about money, savings, SIPs, investments, budgeting, or financial planning!</p>
+                                <p class="reply-text">Hi 👋<br>I'm SpendX AI, your personal finance copilot.<br>Ask me
+                                    anything about money, savings, SIPs, investments, budgeting, or financial planning!
+                                </p>
                             </div>
                         </div>
 
                         <div class="ask-input-mini">
                             <input type="text" placeholder="Ask me anything..." />
+                            <button class="mic-btn-mini" onclick="startSpeechRecognitionMini(this)"
+                                title="Start voice input">
+                                <i class="ri-mic-line"></i>
+                            </button>
                             <button><i class="ri-send-plane-fill"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- EXPENSES VIEW -->
-        <div id="expenses-view" class="spending-view">
-            <div class="spending-header">
-                <div>
-                    <h2>Spending</h2>
-                    <p class="subtitle">Your Expense Breakdown</p>
+            <div id="ask-view" class="chat-view">
+                <div class="chat-container" id="chat-history">
+                    <div class="message msg-ai">
+                        <strong>SpendX AI</strong><br>
+                        Hi User-name! I'm your finance copilot. Ask me anything about your finances! <br><br>
+                        Try asking: <br>
+                        <span style="color:var(--primary); cursor:pointer;">"Can I afford a ₹5,000 SIP?"</span>
+                    </div>
                 </div>
-                <button class="camera-header-btn" onclick="openCameraModal()" title="Scan Bill with Camera">
-                    <i class="ri-camera-line"></i> Scan Bill
-                </button>
+
+                <div class="chat-input-area">
+                    <input type="text" id="user-input" class="chat-input" placeholder="Ask anything..."
+                        onkeypress="handleEnter(event)">
+                    <button class="mic-btn" id="main-mic-btn" onclick="startSpeechRecognition('user-input')"
+                        title="Start voice input">
+                        <i class="ri-mic-line"></i>
+                    </button>
+                    <button class="send-btn"
+                        onclick="document.getElementById('user-input').dataset.source='chat'; sendMessage();"><i
+                            class="ri-send-plane-fill"></i></button>
+                </div>
             </div>
 
-            <div class="spending-subnav">
-                <button class="subnav-btn">Overview</button>
+            <!-- INSIGHTS VIEW -->
+            <div id="insights-view" class="insights-view">
+                <div class="insights-content-wrapper">
+                    <div class="insights-main-content">
+                        <!-- Page Header -->
+                        <div class="insights-page-header">
+                            <h2></h2>
+                            <p class="subtitle">Your Money Overview</p>
+                        </div>
+
+                        <!-- Introductory Card -->
+                        <div class="card insights-intro-card">
+                            <div class="intro-card-content">
+
+                                <p>Here's a snapshot of your finances. Let's make sure you end the month on a strong
+                                    note! 🚀</p>
+                            </div>
+                        </div>
+
+                        <!-- Savings Summary Section -->
+                        <div class="card insights-savings-card">
+                            <h3 class="savings-title">You saved 0% of your income this month! 👍</h3>
+
+                            <!-- Income Section -->
+                            <div class="insight-metric-box">
+                                <div class="metric-header">
+                                    <span class="metric-label">Income</span>
+                                    <span class="metric-value">₹ 0</span>
+                                </div>
+                                <div class="metric-breakdown-bar">
+                                </div>
+                            </div>
+
+                            <!-- Expenses Section -->
+                            <div class="insight-metric-box">
+                                <div class="metric-header">
+                                    <span class="metric-label">Expenses</span>
+                                    <span class="metric-value">₹ 0</span>
+                                </div>
+                                <div class="metric-breakdown-bar">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Track EMI Section -->
+                        <div class="card insights-track-emi-card">
+                            <div class="track-emi-content">
+                                <div class="track-emi-icon">
+                                    <i class="ri-checkbox-circle-line"></i>
+                                </div>
+                                <div class="track-emi-text">
+                                    <h4>Track EMI</h4>
+                                    <p>Consider boosting your SIP or starting a small FD. Compound interest can grow
+                                        your savings! 🚀</p>
+                                    <button class="track-emi-btn" onclick="switchTab('emi', null)">Track EMI</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PDF Upload Section for Insights -->
+                        <div class="card insights-pdf-card" style="margin-top: 20px;">
+                            <div class="pdf-upload-content">
+                                <div class="pdf-icon"
+                                    style="background:var(--secondary-color); color:white; width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
+                                    <i class="ri-file-pdf-line"></i>
+                                </div>
+                                <div class="pdf-text" style="flex:1;">
+                                    <h4 style="margin: 0 0 4px 0; color:var(--text-color);">Upload PhonePe Transactions
+                                    </h4>
+                                    <p style="margin: 0; color:var(--text-muted); font-size: 0.85rem;">Upload your
+                                        exported PhonePe statement PDF to get graphical insights.</p>
+                                    <div style="margin-top: 15px; display: flex; align-items: center; gap: 10px;">
+                                        <input type="file" id="phonepePdfInput" accept="application/pdf"
+                                            style="display: none;" onchange="handlePhonePePdfUpload(event)">
+                                        <button class="btn btn-primary"
+                                            onclick="document.getElementById('phonepePdfInput').click()"
+                                            style="padding: 8px 16px; border:none; border-radius: 8px; font-weight: 500; cursor: pointer;">
+                                            Upload PDF
+                                        </button>
+                                        <span id="pdf-upload-status" style="font-size: 0.8rem; color: #64748b;">No file
+                                            selected</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="pdf-insights-container"
+                                style="display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+                                <h4 style="margin-bottom: 15px;">Transaction Insights</h4>
+                                <!-- Canvas for Chart -->
+                                <div style="position: relative; height: 300px; width: 100%;">
+                                    <canvas id="pdfTransactionsChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Good Spending Habits Section -->
+                        <div class="card insights-habits-card">
+                            <div class="habits-content">
+                                <div class="habits-icon">
+                                    <i class="ri-checkbox-circle-line"></i>
+                                </div>
+                                <div class="habits-text">
+                                    <h4>Good Spending Habits</h4>
+                                    <p>Most of your spending was on needs, not wants. You're keeping a balance, nice
+                                        work! 🎉</p>
+
+                                    <div class="habits-breakdown">
+                                        <div class="habit-item">
+                                            <div class="habit-header">
+                                                <span>Essentials ₹ 0</span>
+                                                <span class="habit-percentage">0%</span>
+                                            </div>
+                                            <div class="habit-bar">
+                                                <div class="habit-bar-fill" style="width: 0%;"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="habit-item">
+                                            <div class="habit-header">
+                                                <span>Wants ₹ 0</span>
+                                                <span class="habit-percentage">0%</span>
+                                            </div>
+                                            <div class="habit-bar">
+                                                <div class="habit-bar-fill wants" style="width: 0%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="habits-labels">
+                                        <span>&lt;60% Needs</span>
+                                        <span>&lt;30% Wants</span>
+                                        <span>&gt;10% Investing</span>
+                                    </div>
+
+                                    <button class="track-expenses-btn" onclick="switchTab('expenses', null)">Track
+                                        expenses →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Sidebar - Ask FinGuide AI -->
+                    <div class="insights-right-sidebar">
+                        <div class="card ask-card">
+                            <p class="eyebrow">Ask SpendX AI</p>
+                            <div class="ai-robot">
+
+                            </div>
+                            <h3>Ask SpendX AI</h3>
+                            <p class="subtitle">Ask anything, I'm here to help!</p>
+
+                            <div class="ask-suggestions">
+                                <button class="pill ghost" onclick="switchTab('ask', null, 'Where to invest?')">Where to
+                                    invest?</button>
+                                <button class="pill ghost" onclick="switchTab('ask', null, 'Track expenses')">Track
+                                    expenses</button>
+                            </div>
+
+                            <button class="ask-primary" onclick="switchTab('ask', null, 'Can I afford a ₹5,000 SIP?')">
+                                Can I afford a ₹5,000 SIP?
+                            </button>
+
+                            <div class="ask-ai-reply" id="insights-ai-reply">
+                                <div class="reply-header">
+                                    <span class="ai-name">Gemini</span>
+                                </div>
+                                <div class="reply-body">
+                                    <p class="reply-text">Hi 👋<br>I'm SpendX AI, your personal finance copilot.<br>Ask
+                                        me anything about money, savings, SIPs, investments, budgeting, or financial
+                                        planning!</p>
+                                </div>
+                            </div>
+
+                            <div class="ask-input-mini">
+                                <input type="text" placeholder="Ask me anything..." />
+                                <button><i class="ri-send-plane-fill"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="spending-content-grid">
-                <div class="spending-main">
-                    <!-- Expense Summary Section -->
-                    <div class="card spending-summary-card">
-                        <div class="card-head" style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
-                            <h3 style="margin: 0;">Expense Summary</h3>
-                            <button class="add-btn" onclick="openAddExpenseModal()">
-                                <i class="ri-add-line"></i> Add Expense
+            <!-- EXPENSES VIEW -->
+            <div id="expenses-view" class="spending-view">
+                <div class="spending-header">
+                    <div>
+                        <h2>Spending</h2>
+                        <p class="subtitle">Your Expense Breakdown</p>
+                    </div>
+                    <button class="camera-header-btn" onclick="openCameraModal()" title="Scan Bill with Camera">
+                        <i class="ri-camera-line"></i> Scan Bill
+                    </button>
+                </div>
+
+                <div class="spending-subnav">
+                    <button class="subnav-btn">Overview</button>
+                </div>
+
+                <div class="spending-content-grid">
+                    <div class="spending-main">
+                        <!-- Expense Summary Section -->
+                        <div class="card spending-summary-card">
+                            <div class="card-head"
+                                style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+                                <h3 style="margin: 0;">Expense Summary</h3>
+                                <button class="add-btn" onclick="openAddExpenseModal()">
+                                    <i class="ri-add-line"></i> Add Expense
+                                </button>
+                            </div>
+                            <div class="spending-summary-grid">
+                                <!-- Left: Donut Chart -->
+                                <div class="spending-chart-section">
+                                    <div class="spending-chart-container">
+                                        <canvas id="spendingChartMain"></canvas>
+                                        <p class="chart-center-label">₹0<br><span>Total Expenses</span></p>
+                                    </div>
+                                </div>
+
+                                <!-- Right: Category List -->
+                                <div class="spending-categories-list">
+                                    <div class="savings-message">
+                                        <i class="ri-thumb-up-line"></i>
+                                        <span>You saved 0% of your income this month!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Budget Usage Section -->
+                        <div class="card budget-usage-card">
+                            <h3>Budget Usage</h3>
+                            <div class="budget-progress-section">
+                                <div class="budget-progress-header">
+                                    <span>₹0 / ₹0 Budget</span>
+                                    <span class="budget-percentage">0%</span>
+                                </div>
+                                <div class="budget-progress-bar">
+                                    <div class="budget-progress-fill" style="width: 0%;"></div>
+                                </div>
+                                <p class="budget-warning">
+                                    <i class="ri-alert-line"></i>
+                                    Set up your budget to track your spending!
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Suggestion Card -->
+                        <div class="card suggestion-card">
+                            <div class="suggestion-content">
+                                <div class="suggestion-icon">
+                                    <i class="ri-restaurant-line"></i>
+                                </div>
+                                <div class="suggestion-text">
+                                    <p>Review your dining out expenses to find areas to cut back a bit.</p>
+                                    <button class="suggestion-btn">
+                                        Track expenses <i class="ri-arrow-right-line"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel - Ask FinGuide AI -->
+                    <div class="spending-right">
+                        <div class="card ask-card">
+                            <div class="ask-header-icons">
+                                <i class="ri-more-2-line"></i>
+                            </div>
+                            <p class="eyebrow">Ask SpendX AI</p>
+                            <div class="ai-robot">
+
+                            </div>
+                            <h3>Ask SpendX AI</h3>
+                            <p class="subtitle">Ask anything, I'm here to help!</p>
+
+                            <div class="ask-suggestions">
+                                <button class="pill yellow" onclick="switchTab('ask', null, 'Where to invest?')">Where
+                                    to invest?</button>
+                                <button class="pill red" onclick="switchTab('ask', null, 'Track expenses')">Track
+                                    expenses</button>
+                                <button class="pill blue"
+                                    onclick="switchTab('ask', null, 'Can I afford a ₹5,000 SIP?')">Can I afford a ₹5,000
+                                    SIP?</button>
+                            </div>
+
+                            <div class="ask-chat-history" id="expenses-chat-history" style="display: none;">
+                                <div class="chat-history-header-item">
+                                    <div class="gemini-header">
+                                        <span class="gemini-icon">G</span>
+                                        <span class="ai-name">SpendX</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ask-ai-reply" id="expenses-ai-reply">
+                                <div class="reply-header">
+                                    <span class="ai-name">Gemini</span>
+                                </div>
+                                <div class="reply-body">
+                                    <p class="reply-text">Hi 👋<br>I'm SpendX AI, your personal finance copilot.<br>Ask
+                                        me anything about money, savings, SIPs, investments, budgeting, or financial
+                                        planning!</p>
+                                </div>
+                            </div>
+
+                            <div class="ask-input-mini">
+                                <input type="text" placeholder="Ask me anything..." />
+                                <button><i class="ri-send-plane-fill"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INCOME VIEW -->
+            <div id="income-view" class="income-view">
+                <div class="income-header">
+                    <div>
+                        <h2>Income</h2>
+                        <p class="subtitle">Your Income Overview</p>
+                    </div>
+                </div>
+
+                <div class="income-subnav">
+
+                </div>
+
+                <div class="income-content-grid">
+                    <div class="income-main">
+                        <!-- Monthly Income Card and Graph Row -->
+                        <div class="income-top-row">
+                            <!-- Monthly Income Card -->
+                            <div class="card income-monthly-card">
+                                <div class="income-monthly-header">
+                                    <h3>₹0</h3>
+                                    <p class="income-monthly-label">Monthly Income</p>
+                                </div>
+                                <div class="income-status">
+                                    <p class="status-text">No data yet</p>
+                                    <div class="income-change" style="opacity: 0;">
+                                        <i class="ri-rocket-line"></i>
+                                        <span>-</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Income Graph -->
+                            <div class="card income-graph-card">
+                                <h4>Income over the past 6 months</h4>
+                                <div class="income-chart-container">
+                                    <canvas id="incomeChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Income Sources -->
+                        <div class="card income-sources-card">
+                            <div class="card-head">
+                                <h3>Income Sources</h3>
+                                <button class="add-btn" onclick="openAddIncomeModal()">
+                                    <i class="ri-add-line"></i> Add Income
+                                </button>
+                            </div>
+
+                            <div class="income-category">
+                                <p class="category-label">ACTIVE INCOME</p>
+                                <!-- Income sources will populate here -->
+                            </div>
+
+                            <div class="income-category" style="margin-top: 24px;">
+                                <p class="category-label">PASSIVE INCOME</p>
+                                <!-- Income sources will populate here -->
+                            </div>
+                        </div>
+
+                        <!-- Income Trends -->
+                        <div class="card income-trends-card">
+                            <h3>Income Trends</h3>
+                            <p class="subtitle">Income over the past 5 months</p>
+
+                            <div style="padding: 20px; text-align: center; color: var(--text-muted);">
+                                <p>No income history yet.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel - Ask FinGuide AI -->
+                    <div class="income-right">
+                        <div class="card ask-card">
+                            <div class="ask-header-icons">
+                                <i class="ri-message-3-line"></i>
+                                <i class="ri-notification-3-line"></i>
+                                <img src="user.png.png" alt="User" class="mini-avatar">
+                            </div>
+                            <p class="eyebrow">Ask FinGuide AI</p>
+                            <div class="ai-robot">
+
+                            </div>
+                            <h3>Ask SpendX AI</h3>
+                            <p class="subtitle">Ask anything, I'm here to help!</p>
+
+                            <div class="ask-suggestions">
+                                <button class="pill ghost" onclick="switchTab('ask', null, 'Where to invest?')">Where to
+                                    invest?</button>
+                                <button class="pill ghost" onclick="switchTab('ask', null, 'Track expenses')">Track
+                                    expenses</button>
+                            </div>
+
+                            <button class="ask-primary" onclick="switchTab('ask', null, 'Can I afford a ₹5,000 SIP?')">
+                                Can I afford a ₹5,000 SIP?
+                            </button>
+
+                            <div class="ask-chat-history" id="income-chat-history" style="display: none;">
+                                <div class="chat-history-item">
+                                    <div class="chat-history-header">
+                                        <span class="ai-name">SpendX</span>
+                                        <i class="ri-close-line"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ask-ai-reply" id="income-ai-reply">
+                                <div class="reply-header">
+                                    <span class="ai-name">Gemini</span>
+                                </div>
+                                <div class="reply-body">
+                                    <p class="reply-text">Hi 👋<br>I'm SpendX AI, your personal finance copilot.<br>Ask
+                                        me anything about money, savings, SIPs, investments, budgeting, or financial
+                                        planning!</p>
+                                </div>
+                            </div>
+
+                            <div class="ask-input-mini">
+                                <input type="text" placeholder="Ask me anything..." />
+                                <button><i class="ri-send-plane-fill"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INVESTMENTS VIEW -->
+            <div id="investments-view" class="investments-view">
+                <div class="investments-header">
+                    <div>
+                        <h2>Investments</h2>
+                        <p class="subtitle">Your Portfolio Overview</p>
+                    </div>
+                </div>
+
+                <div class="investments-subnav">
+                    <button class="subnav-btn">Overview</button>
+                    <button class="subnav-btn active">SIPs</button>
+                    <button class="subnav-btn">Stocks</button>
+                    <button class="subnav-btn">FDs</button>
+                    <button class="subnav-btn">Mutual Funds <i class="ri-arrow-right-s-line"></i></button>
+                </div>
+
+                <div class="investments-content-grid">
+                    <div class="investments-main">
+                        <!-- Total Investments Card -->
+                        <div class="card investments-total-card">
+                            <div class="investments-total-header">
+                                <div class="total-investments-info">
+                                    <h3>₹0</h3>
+                                    <p class="total-label">Total investments</p>
+                                    <div class="growth-indicator" style="opacity: 0;">
+                                        <i class="ri-rocket-line"></i>
+                                        <span>No data yet</span>
+                                    </div>
+                                </div>
+                                <div class="investments-chart-section">
+                                    <div class="investments-chart-container">
+                                        <canvas id="investmentsChart"></canvas>
+                                        <p class="chart-center-label">₹0<br><span>Total investments</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="investment-cards-grid">
+                            <div
+                                style="padding: 20px; text-align: center; color: var(--text-muted); grid-column: 1 / -1;">
+                                <p>No investments tracked yet.</p>
+                            </div>
+                        </div>
+
+                        <!-- Smart Investing Tips Card -->
+                        <div class="card investing-tips-card">
+                            <div class="tips-content">
+                                <div class="tips-icon">
+                                    <i class="ri-lightbulb-flash-line"></i>
+                                </div>
+                                <div class="tips-text">
+                                    <h4>Smart Investing Tips</h4>
+                                    <p>Consider increasing your SIP by 5% each year. Compound growth works wonders in
+                                        the long run!</p>
+                                </div>
+                                <button class="add-investment-btn">
+                                    + Add Investment
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel - Ask FinGuide AI -->
+                    <div class="investments-right">
+                        <div class="card ask-card">
+                            <div class="ask-header-icons">
+                                <i class="ri-more-2-line"></i>
+                            </div>
+                            <p class="eyebrow">Ask SpendX AI</p>
+                            <div class="ai-robot">
+
+                            </div>
+                            <h3>Ask SpendX AI</h3>
+                            <p class="subtitle">Ask anything, I'm here to help!</p>
+
+                            <div class="ask-suggestions">
+                                <button class="pill yellow" onclick="switchTab('ask', null, 'Where to invest?')">
+                                    <i class="ri-lightbulb-line"></i>
+                                    Where to invest?
+                                </button>
+                                <button class="pill red" onclick="switchTab('ask', null, 'Track expenses')">
+                                    <i class="ri-file-list-3-line"></i>
+                                    Track expenses
+                                </button>
+                                <button class="ask-primary"
+                                    onclick="switchTab('ask', null, 'Can I afford a ₹5,000 SIP?')">
+                                    Can I afford a ₹5,000 SIP?
+                                </button>
+                            </div>
+
+                            <div class="ask-chat-history" id="investments-chat-history" style="display: none;">
+                                <div class="chat-history-header-item">
+                                    <div class="gemini-header">
+                                        <span class="gemini-icon">G</span>
+                                        <span class="ai-name">SpendX</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ask-ai-reply" id="investments-ai-reply">
+                                <div class="reply-header">
+                                    <span class="ai-name">Gemini</span>
+                                </div>
+                                <div class="reply-body">
+                                    <p class="reply-text">Hi 👋<br>I'm SpendX AI, your personal finance copilot.<br>Ask
+                                        me anything about money, savings, SIPs, investments, budgeting, or financial
+                                        planning!</p>
+                                </div>
+                            </div>
+
+                            <div class="ask-input-mini">
+                                <input type="text" placeholder="Ask me anything..." />
+                                <button><i class="ri-send-plane-fill"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EMI / BILLS VIEW -->
+            <div id="emi-view" class="emi-view">
+                <div class="emi-header">
+                    <div>
+                        <h2>EMI / Bills</h2>
+                        <p class="subtitle">Your Payments Overview</p>
+                    </div>
+                </div>
+
+                <div class="emi-subnav">
+                    <button class="subnav-btn">Overview</button>
+                    <button class="subnav-btn active">Tracking</button>
+                    <button class="subnav-btn">EMI</button>
+                    <button class="subnav-btn">Bills</button>
+                    <button class="subnav-btn">Bills <i class="ri-arrow-right-s-line"></i></button>
+                </div>
+
+                <div class="emi-content-grid">
+                    <div class="emi-main">
+                        <!-- Upcoming This Month Summary -->
+                        <div class="card emi-summary-card">
+                            <div class="emi-summary-header">
+                                <h3>₹0</h3>
+                                <p class="emi-summary-label">Upcoming this month</p>
+                            </div>
+                            <div class="emi-status-message">
+                                <span>🎉</span>
+                                <span>Good news! No payments due right now.</span>
+                            </div>
+                            <div class="emi-progress-bars">
+                                <!-- Future progress bars will populate here -->
+                            </div>
+                        </div>
+
+                        <!-- EMI Tracking Reminder -->
+                        <div class="card emi-reminder-card">
+                            <div class="emi-reminder-content">
+                                <div class="emi-reminder-icon">
+                                    <i class="ri-time-line"></i>
+                                </div>
+                                <div class="emi-reminder-text">
+                                    <p>Track EMI. Set reminders to never miss a payment deadline! I'll remind you at
+                                        every step.</p>
+                                </div>
+                                <button class="emi-tracker-btn">
+                                    Full Tracker <i class="ri-arrow-right-s-line"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- EMI / Bills Breakdown -->
+                        <div class="emi-breakdown-grid">
+                            <!-- Left Column: Upcoming Payments -->
+                            <div class="card emi-breakdown-card">
+                                <div class="breakdown-header">
+                                    <h4>Upcoming EMI</h4>
+                                </div>
+                                <div style="padding: 20px; text-align: center; color: var(--text-muted);">
+                                    <p>No upcoming EMIs.</p>
+                                </div>
+                            </div>
+
+                            <!-- Right Column: Bills Due -->
+                            <div class="card emi-breakdown-card">
+                                <div class="breakdown-header">
+                                    <h4>Bills Due</h4>
+                                </div>
+                                <div style="padding: 20px; text-align: center; color: var(--text-muted);">
+                                    <p>No pending bills.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payment History -->
+                        <div class="emi-history-grid">
+                            <div class="card emi-history-card"
+                                style="grid-column: 1 / -1; padding: 20px; text-align: center; color: var(--text-muted);">
+                                <p>No payment history recorded.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel - Ask SpendX AI -->
+                    <div class="emi-right">
+                        <div class="card ask-card">
+                            <div class="ask-header-icons">
+                                <i class="ri-more-2-line"></i>
+                            </div>
+                            <p class="eyebrow">Ask SpendX AI</p>
+                            <div class="ai-robot">
+
+                            </div>
+                            <h3>Ask SpendX AI</h3>
+                            <p class="subtitle">Ask anything, I'm here to help!</p>
+
+                            <div class="ask-suggestions">
+                                <button class="pill yellow" onclick="switchTab('ask', null, 'Where to invest?')">
+                                    <i class="ri-lightbulb-line"></i>
+                                    Where to invest?
+                                </button>
+                                <button class="pill red" onclick="switchTab('ask', null, 'Track expenses')">
+                                    <i class="ri-file-list-3-line"></i>
+                                    Track expenses
+                                </button>
+                                <button class="ask-primary"
+                                    onclick="switchTab('ask', null, 'Can I afford a ₹5,000 SIP?')">
+                                    Can I afford a ₹5,000 SIP?
+                                </button>
+                            </div>
+
+                            <div class="ask-chat-history" id="emi-chat-history" style="display: none;">
+                                <div class="chat-history-header-item">
+                                    <div class="gemini-header">
+                                        <span class="gemini-icon">G</span>
+                                        <span class="ai-name">SpendX</span>
+                                    </div>
+                                </div>
+                                <!-- EMI history entries go here -->
+                            </div>
+
+                            <div class="ask-ai-reply" id="emi-ai-reply">
+                                <div class="reply-header">
+                                    <span class="ai-name">Gemini</span>
+                                </div>
+                                <div class="reply-body">
+                                    <p class="reply-text">Hi 👋<br>I'm SpendX AI, your personal finance copilot.<br>Ask
+                                        me anything about money, savings, SIPs, investments, budgeting, or financial
+                                        planning!</p>
+                                </div>
+                            </div>
+
+                            <div class="ask-input-mini">
+                                <input type="text" placeholder="Ask me anything..." />
+                                <button><i class="ri-send-plane-fill"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GOALS VIEW -->
+            <div id="goals-view" class="goals-view">
+                <div class="goals-header">
+                    <div>
+                        <h2>Goals</h2>
+                        <p class="subtitle">Your Financial Milestones</p>
+                    </div>
+                </div>
+
+                <div class="goals-subnav">
+                    <button class="subnav-btn active">Overview</button>
+                    <button class="subnav-btn">Tracker <i class="ri-arrow-right-s-line"></i></button>
+                </div>
+
+                <div class="goals-content-grid">
+                    <div class="goals-main">
+                        <!-- Goal Cards List -->
+                        <div class="goals-list">
+                            <div style="padding: 20px; text-align: center; color: var(--text-muted);">
+                                <p>No goals set yet.</p>
+                            </div>
+                        </div>
+
+                        <!-- Add Goal Button -->
+                        <button class="add-goal-card-btn" style="margin-top: 20px;">
+                            <i class="ri-add-line"></i>
+                            <span>Add Goal</span>
+                        </button>
+                    </div>
+
+                    <!-- Right Panel - Ask FinGuide AI -->
+                    <div class="goals-right">
+                        <div class="card ask-card">
+                            <div class="ask-header-icons">
+                                <i class="ri-more-2-line"></i>
+                            </div>
+                            <p class="eyebrow">Ask SpendX AI</p>
+                            <div class="ai-robot">
+
+                            </div>
+                            <h3>Ask SpendX AI</h3>
+                            <p class="subtitle">Ask anything, I'm here to help!</p>
+
+                            <div class="goals-suggestions-list" id="goals-suggestions-list" style="display: none;">
+                                <!-- Goal suggestions will populate here -->
+                            </div>
+
+                            <div class="ask-ai-reply" id="goals-ai-reply">
+                                <div class="reply-header">
+                                    <span class="ai-name">Gemini</span>
+                                </div>
+                                <div class="reply-body">
+                                    <p class="reply-text">Hi 👋<br>I'm SpendX AI, your personal finance copilot.<br>Ask
+                                        me anything about money, savings, SIPs, investments, budgeting, or financial
+                                        planning!</p>
+                                </div>
+                            </div>
+
+                            <div class="ask-input-mini">
+                                <input type="text" placeholder="Ask me anything..." />
+                                <button><i class="ri-send-plane-fill"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROFILE VIEW -->
+            <div id="profile-view" class="profile-view">
+                <div class="profile-header-section">
+                    <div class="profile-cover">
+                        <div class="profile-avatar-large">
+                            <img src="user.png.png" alt="User" class="avatar-large">
+                            <button class="edit-avatar-btn">
+                                <i class="ri-camera-line"></i>
                             </button>
                         </div>
-                        <div class="spending-summary-grid">
-                            <!-- Left: Donut Chart -->
-                            <div class="spending-chart-section">
-                                <div class="spending-chart-container">
-                                    <canvas id="spendingChartMain"></canvas>
-                                    <p class="chart-center-label">₹19,000<br><span>Total Expenses</span></p>
+                    </div>
+                    <div class="profile-info-header">
+                        <h2>User-name</h2>
+                        <p class="profile-email">user-email@mail.com</p>
+                        <div class="profile-badge">
+                            <i class="ri-vip-crown-line"></i>
+                            <span>Premium Member</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-content-grid">
+                    <div class="profile-main">
+                        <!-- Personal Information -->
+                        <div class="card profile-section-card">
+                            <div class="card-head">
+                                <h3>Personal Information</h3>
+                                <button class="edit-btn">
+                                    <i class="ri-edit-line"></i> Edit
+                                </button>
+                            </div>
+                            <div class="profile-info-grid">
+                                <div class="info-item">
+                                    <label>Full Name</label>
+                                    <p>User-name</p>
+                                </div>
+                                <div class="info-item">
+                                    <label>Email</label>
+                                    <p>user-email@mail.com</p>
+                                </div>
+                                <div class="info-item">
+                                    <label>Phone</label>
+                                    <p>+91 98765 *****</p>
+                                </div>
+                                <div class="info-item">
+                                    <label>Date of Birth</label>
+                                    <p>January 15, 1995</p>
+                                </div>
+                                <div class="info-item">
+                                    <label>Address</label>
+                                    <p>123 odisha ,*****</p>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Right: Category List -->
-                            <div class="spending-categories-list">
-                                <div class="savings-message">
-                                    <i class="ri-thumb-up-line"></i>
-                                    <span>You saved 37% of your income this month!</span>
-                                </div>
-                                
-                                <div class="category-item">
-                                    <div class="category-info">
-                                        <div class="category-header">
-                                            <span class="dot dot-orange"></span>
-                                            <span class="category-name">Dining Out</span>
+                        <!-- Account Settings -->
+                        <div class="card profile-section-card">
+                            <div class="card-head">
+                                <h3>Account Settings</h3>
+                            </div>
+                            <div class="settings-list">
+                                <div class="setting-item">
+                                    <div class="setting-left">
+                                        <div class="setting-icon bg-blue">
+                                            <i class="ri-lock-password-line"></i>
                                         </div>
-                                        <div class="category-amounts">
-                                            <span class="amount">₹7,000</span>
-                                            <span class="percentage">37%</span>
+                                        <div class="setting-info">
+                                            <h4>Change Password</h4>
+                                            <p>Update your password regularly for security</p>
                                         </div>
                                     </div>
-                                    <div class="category-progress-bar">
-                                        <div class="category-progress-fill" style="width: 37%; background: #f97316;"></div>
-                                    </div>
+                                    <i class="ri-arrow-right-s-line setting-arrow"></i>
                                 </div>
 
-                                <div class="category-item">
-                                    <div class="category-info">
-                                        <div class="category-header">
-                                            <span class="dot dot-green"></span>
-                                            <span class="category-name">Groceries</span>
+                                <div class="setting-item">
+                                    <div class="setting-left">
+                                        <div class="setting-icon bg-green">
+                                            <i class="ri-notification-3-line"></i>
                                         </div>
-                                        <div class="category-amounts">
-                                            <span class="amount">₹4,100</span>
-                                            <span class="percentage">22%</span>
+                                        <div class="setting-info">
+                                            <h4>Notifications</h4>
+                                            <p>Manage your notification preferences</p>
                                         </div>
                                     </div>
-                                    <div class="category-progress-bar">
-                                        <div class="category-progress-fill" style="width: 22%; background: #22c55e;"></div>
-                                    </div>
+                                    <i class="ri-arrow-right-s-line setting-arrow"></i>
                                 </div>
 
-                                <div class="category-item">
-                                    <div class="category-info">
-                                        <div class="category-header">
-                                            <span class="dot dot-purple"></span>
-                                            <span class="category-name">Entertainment</span>
+                                <div class="setting-item">
+                                    <div class="setting-left">
+                                        <div class="setting-icon bg-purple">
+                                            <i class="ri-shield-check-line"></i>
                                         </div>
-                                        <div class="category-amounts">
-                                            <span class="amount">₹3,000</span>
-                                            <span class="percentage">16%</span>
+                                        <div class="setting-info">
+                                            <h4>Privacy & Security</h4>
+                                            <p>Control your privacy settings</p>
                                         </div>
                                     </div>
-                                    <div class="category-progress-bar">
-                                        <div class="category-progress-fill" style="width: 16%; background: #8b5cf6;"></div>
-                                    </div>
+                                    <i class="ri-arrow-right-s-line setting-arrow"></i>
                                 </div>
 
-                                <div class="category-item">
-                                    <div class="category-info">
-                                        <div class="category-header">
-                                            <span class="dot dot-blue"></span>
-                                            <span class="category-name">Transportation</span>
+                                <div class="setting-item">
+                                    <div class="setting-left">
+                                        <div class="setting-icon bg-yellow">
+                                            <i class="ri-bank-card-line"></i>
                                         </div>
-                                        <div class="category-amounts">
-                                            <span class="amount">₹2,200</span>
-                                            <span class="percentage">12%</span>
+                                        <div class="setting-info">
+                                            <h4>Payment Methods</h4>
+                                            <p>Manage your linked cards and bank accounts</p>
                                         </div>
                                     </div>
-                                    <div class="category-progress-bar">
-                                        <div class="category-progress-fill" style="width: 12%; background: #3b82f6;"></div>
-                                    </div>
+                                    <i class="ri-arrow-right-s-line setting-arrow"></i>
                                 </div>
+                            </div>
+                        </div>
 
-                                <div class="category-item">
-                                    <div class="category-info">
-                                        <div class="category-header">
-                                            <span class="dot dot-yellow"></span>
-                                            <span class="category-name">Bills & Utilities</span>
-                                        </div>
-                                        <div class="category-amounts">
-                                            <span class="amount">₹1,900</span>
-                                            <span class="percentage">10%</span>
-                                        </div>
+                        <!-- Subscription -->
+                        <div class="card profile-section-card">
+                            <div class="card-head">
+                                <h3>Subscription</h3>
+                            </div>
+                            <div class="subscription-card">
+                                <div class="subscription-info">
+                                    <div class="subscription-icon">
+                                        <i class="ri-vip-crown-fill"></i>
                                     </div>
-                                    <div class="category-progress-bar">
-                                        <div class="category-progress-fill" style="width: 10%; background: #eab308;"></div>
-                                    </div>
-                                </div>
-
-                                <div class="category-item">
-                                    <div class="category-info">
-                                        <div class="category-header">
-                                            <span class="dot dot-teal"></span>
-                                            <span class="category-name">Shopping</span>
-                                        </div>
-                                        <div class="category-amounts">
-                                            <span class="amount">₹1,600</span>
-                                            <span class="percentage">8%</span>
-                                        </div>
-                                    </div>
-                                    <div class="category-progress-bar">
-                                        <div class="category-progress-fill" style="width: 8%; background: #14b8a6;"></div>
+                                    <div>
+                                        <h4>Premium Plan</h4>
+                                        <p>Active until December 31, 2024</p>
                                     </div>
                                 </div>
+                                <button class="manage-subscription-btn">Manage</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Budget Usage Section -->
-                    <div class="card budget-usage-card">
-                        <h3>Budget Usage</h3>
-                        <div class="budget-progress-section">
-                            <div class="budget-progress-header">
-                                <span>₹19,000 / ₹20,000 Budget</span>
-                                <span class="budget-percentage">95%</span>
-                            </div>
-                            <div class="budget-progress-bar">
-                                <div class="budget-progress-fill" style="width: 95%;"></div>
-                            </div>
-                            <p class="budget-warning">
-                                <i class="ri-alert-line"></i>
-                                You are close to exceeding your ₹20,000 monthly budget!
-                            </p>
-                        </div>
-                    </div>
+                    <!-- Right Sidebar - Quick Stats -->
+                    <div class="profile-sidebar">
+                        <!-- Financial Summary -->
+                        <div class="card profile-stats-card">
+                            <h3>Financial Summary</h3>
+                            <div class="stats-list">
+                                <div class="stat-item">
+                                    <div class="stat-icon bg-blue">
+                                        <i class="ri-wallet-3-line"></i>
+                                    </div>
+                                    <div class="stat-details">
+                                        <p class="stat-label">Monthly Income</p>
+                                        <p class="stat-value" id="profile-income-stat">₹0</p>
+                                    </div>
+                                </div>
 
-                    <!-- Suggestion Card -->
-                    <div class="card suggestion-card">
-                        <div class="suggestion-content">
-                            <div class="suggestion-icon">
-                                <i class="ri-restaurant-line"></i>
+                                <div class="stat-item">
+                                    <div class="stat-icon bg-red">
+                                        <i class="ri-file-list-3-line"></i>
+                                    </div>
+                                    <div class="stat-details">
+                                        <p class="stat-label">Monthly Expenses</p>
+                                        <p class="stat-value" id="profile-expenses-stat">₹0</p>
+                                    </div>
+                                </div>
+
+                                <div class="stat-item">
+                                    <div class="stat-icon bg-green">
+                                        <i class="ri-line-chart-line"></i>
+                                    </div>
+                                    <div class="stat-details">
+                                        <p class="stat-label">Total Investments</p>
+                                        <p class="stat-value" id="profile-investments-stat">₹0</p>
+                                    </div>
+                                </div>
+
+                                <div class="stat-item">
+                                    <div class="stat-icon bg-purple">
+                                        <i class="ri-flag-line"></i>
+                                    </div>
+                                    <div class="stat-details">
+                                        <p class="stat-label">Active Goals</p>
+                                        <p class="stat-value">0</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="suggestion-text">
-                                <p>Review your dining out expenses to find areas to cut back a bit.</p>
-                                <button class="suggestion-btn">
-                                    Track expenses <i class="ri-arrow-right-line"></i>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="card profile-actions-card">
+                            <h3>Quick Actions</h3>
+                            <div class="quick-actions-list">
+                                <button class="quick-action-btn" onclick="switchTab('dashboard', null)">
+                                    <i class="ri-dashboard-line"></i>
+                                    <span>Go to Dashboard</span>
+                                </button>
+                                <button class="quick-action-btn" onclick="switchTab('goals', null)">
+                                    <i class="ri-flag-line"></i>
+                                    <span>View Goals</span>
+                                </button>
+                                <button class="quick-action-btn" onclick="switchTab('investments', null)">
+                                    <i class="ri-line-chart-line"></i>
+                                    <span>Check Investments</span>
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Right Panel - Ask FinGuide AI -->
-                <div class="spending-right">
-                    <div class="card ask-card">
-                        <div class="ask-header-icons">
-                            <i class="ri-more-2-line"></i>
-                        </div>
-                        <p class="eyebrow">Ask SpendX AI</p>
-                        <div class="ai-robot">
-                           
-                        </div>
-                        <h3>Ask SpendX AI</h3>
-                        <p class="subtitle">Ask anything, I'm here to help!</p>
-
-                        <div class="ask-suggestions">
-                            <button class="pill yellow" onclick="switchTab('ask', null, 'Where to invest?')">Where to invest?</button>
-                            <button class="pill red" onclick="switchTab('ask', null, 'Track expenses')">Track expenses</button>
-                            <button class="pill blue" onclick="switchTab('ask', null, 'Can I afford a ₹5,000 SIP?')">Can I afford a ₹5,000 SIP?</button>
-                        </div>
-
-                        <div class="ask-chat-history" id="expenses-chat-history" style="display: none;">
-                            <div class="chat-history-header-item">
-                                <div class="gemini-header">
-                                    <span class="gemini-icon">G</span>
-                                    <span class="ai-name">SpendX</span>
-                                </div>
-                            </div>
-                            <div class="chat-history-item spending-chat">
-                                <div class="chat-history-content">
-                                    <h5>Dining Out ₹7,000 37%</h5>
-                                    <div class="merchant-list">
-                                        <div class="merchant-item">
-                                            <span class="merchant-name">Swiggy</span>
-                                            <span class="merchant-amount">₹1,400</span>
-                                            <span class="merchant-date">Apr 20, April</span>
-                                        </div>
-                                        <div class="merchant-item">
-                                            <span class="merchant-name">Pizza Hut</span>
-                                            <span class="merchant-amount">₹900</span>
-                                            <span class="merchant-date">Apr 16, April</span>
-                                        </div>
-                                        <div class="merchant-item">
-                                            <span class="merchant-name">Cafe Coffee Day</span>
-                                            <span class="merchant-amount">₹700</span>
-                                            <span class="merchant-date">Apr 10, April</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="ask-ai-reply" id="expenses-ai-reply">
-                            <div class="reply-header">
-                                <span class="ai-name">Gemini</span>
-                            </div>
-                            <div class="reply-body">
-                                <p class="reply-text">Hi 👋<br>I'm SpendX AI, your personal finance copilot.<br>Ask me anything about money, savings, SIPs, investments, budgeting, or financial planning!</p>
-                            </div>
-                        </div>
-
-                        <div class="ask-input-mini">
-                            <input type="text" placeholder="Ask me anything..." />
-                            <button><i class="ri-send-plane-fill"></i></button>
-                        </div>
-                    </div>
-                </div>
             </div>
-        </div>
-
-        <!-- INCOME VIEW -->
-        <div id="income-view" class="income-view">
-            <div class="income-header">
-                <div>
-                    <h2>Income</h2>
-                    <p class="subtitle">Your Income Overview</p>
-                </div>
-            </div>
-
-            <div class="income-subnav">
-                
-            </div>
-
-            <div class="income-content-grid">
-                <div class="income-main">
-                    <!-- Monthly Income Card and Graph Row -->
-                    <div class="income-top-row">
-                        <!-- Monthly Income Card -->
-                        <div class="card income-monthly-card">
-                            <div class="income-monthly-header">
-                                <h3>₹30,000</h3>
-                                <p class="income-monthly-label">Monthly Income</p>
-                            </div>
-                            <div class="income-status">
-                                <p class="status-text">You're on track, no income reduction</p>
-                                <div class="income-change">
-                                    <i class="ri-rocket-line"></i>
-                                    <span>+14% vs March</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Income Graph -->
-                        <div class="card income-graph-card">
-                            <h4>Income over the past 6 months</h4>
-                            <div class="income-chart-container">
-                                <canvas id="incomeChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Income Sources -->
-                    <div class="card income-sources-card">
-                        <div class="card-head">
-                            <h3>Income Sources</h3>
-                            <button class="add-btn" onclick="openAddIncomeModal()">
-                                <i class="ri-add-line"></i> Add Income
-                            </button>
-                        </div>
-                        
-                        <div class="income-category">
-                            <p class="category-label">ACTIVE INCOME</p>
-                            
-                            <div class="income-source-item">
-                                <div class="source-icon bg-blue">
-                                    <i class="ri-building-line"></i>
-                                </div>
-                                <div class="source-details">
-                                    <h4>Full-time Salary</h4>
-                                    <p>Fulltime monthly</p>
-                                </div>
-                                <div class="source-amount">₹25,000</div>
-                            </div>
-
-                            <div class="income-source-item">
-                                <div class="source-icon bg-green">
-                                    <i class="ri-circle-fill"></i>
-                                </div>
-                                <div class="source-details">
-                                    <h4>Interest Income</h4>
-                                    <p>Most recent from niap FD Apr 15.1.5 Lakhs</p>
-                                </div>
-                                <div class="source-amount">₹3,000</div>
-                            </div>
-                        </div>
-
-                        <div class="income-category" style="margin-top: 24px;">
-                            <p class="category-label">PASSIVE INCOME</p>
-                            
-                            <div class="income-source-item">
-                                <div class="source-icon bg-purple">
-                                    <i class="ri-user-line"></i>
-                                </div>
-                                <div class="source-details">
-                                    <h4>Freelance or Side Income</h4>
-                                    <p>Graphic designing gig payment April</p>
-                                </div>
-                                <div class="source-amount">₹2,000</div>
-                            </div>
-
-                            <div class="income-source-item">
-                                <div class="source-icon bg-yellow">
-                                    <i class="ri-shopping-bag-line"></i>
-                                </div>
-                                <div class="source-details">
-                                    <h4>Shopping</h4>
-                                    <p>Interment April</p>
-                                </div>
-                                <div class="source-amount">₹1,600</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Income Trends -->
-                    <div class="card income-trends-card">
-                        <h3>Income Trends</h3>
-                        <p class="subtitle">Income over the past 5 months</p>
-                        
-                        <div class="trend-item">
-                            <div class="trend-left">
-                                <h4>Swiggy</h4>
-                                <p>Apr Lalary</p>
-                            </div>
-                            <div class="trend-amount">₹30,000</div>
-                        </div>
-
-                        <div class="trend-item">
-                            <div class="trend-left">
-                                <h4>Sashance</h4>
-                                <p>Apr 15, Lanty</p>
-                            </div>
-                            <div class="trend-amount">₹5,000</div>
-                        </div>
-
-                        <div class="trend-item">
-                            <div class="trend-left">
-                                <h4>Freelance</h4>
-                                <p>Apr 18, April</p>
-                            </div>
-                            <div class="trend-amount">₹2,000</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Panel - Ask FinGuide AI -->
-                <div class="income-right">
-                    <div class="card ask-card">
-                        <div class="ask-header-icons">
-                            <i class="ri-message-3-line"></i>
-                            <i class="ri-notification-3-line"></i>
-                            <img src="user.png.png" alt="User" class="mini-avatar">
-                        </div>
-                        <p class="eyebrow">Ask FinGuide AI</p>
-                        <div class="ai-robot">
-                           
-                        </div>
-                        <h3>Ask SpendX AI</h3>
-                        <p class="subtitle">Ask anything, I'm here to help!</p>
-
-                        <div class="ask-suggestions">
-                            <button class="pill ghost" onclick="switchTab('ask', null, 'Where to invest?')">Where to invest?</button>
-                            <button class="pill ghost" onclick="switchTab('ask', null, 'Track expenses')">Track expenses</button>
-                        </div>
-
-                        <button class="ask-primary" onclick="switchTab('ask', null, 'Can I afford a ₹5,000 SIP?')">
-                            Can I afford a ₹5,000 SIP?
-                        </button>
-
-                        <div class="ask-chat-history" id="income-chat-history" style="display: none;">
-                            <div class="chat-history-item">
-                                <div class="chat-history-header">
-                                    <span class="ai-name">SpendX</span>
-                                    <i class="ri-close-line"></i>
-                                </div>
-                            </div>
-                            <div class="chat-history-item">
-                                <div class="chat-history-content">
-                                    <h5>Swiggy Apr Salary</h5>
-                                    <p>₹30,000</p>
-                                    <span class="strikethrough">₹35,000</span>
-                                    <span class="date">April 31</span>
-                                </div>
-                            </div>
-                            <div class="chat-history-item">
-                                <div class="chat-history-content">
-                                    <h5>Sashance</h5>
-                                    <p>₹5,000</p>
-                                    <span class="strikethrough">₹1,000</span>
-                                    <span class="date">April 15, Lanty</span>
-                                </div>
-                            </div>
-                            <div class="chat-history-item">
-                                <div class="chat-history-content">
-                                    <h5>Freelance or Side Income</h5>
-                                    <p>₹2,000</p>
-                                    <span class="strikethrough">₹2,000</span>
-                                    <span class="date">April 18, April</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="ask-ai-reply" id="income-ai-reply">
-                            <div class="reply-header">
-                                <span class="ai-name">Gemini</span>
-                            </div>
-                            <div class="reply-body">
-                                <p class="reply-text">Hi 👋<br>I'm SpendX AI, your personal finance copilot.<br>Ask me anything about money, savings, SIPs, investments, budgeting, or financial planning!</p>
-                            </div>
-                        </div>
-
-                        <div class="ask-input-mini">
-                            <input type="text" placeholder="Ask me anything..." />
-                            <button><i class="ri-send-plane-fill"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- INVESTMENTS VIEW -->
-        <div id="investments-view" class="investments-view">
-            <div class="investments-header">
-                <div>
-                    <h2>Investments</h2>
-                    <p class="subtitle">Your Portfolio Overview</p>
-                </div>
-            </div>
-
-            <div class="investments-subnav">
-                <button class="subnav-btn">Overview</button>
-                <button class="subnav-btn active">SIPs</button>
-                <button class="subnav-btn">Stocks</button>
-                <button class="subnav-btn">FDs</button>
-                <button class="subnav-btn">Mutual Funds <i class="ri-arrow-right-s-line"></i></button>
-            </div>
-
-            <div class="investments-content-grid">
-                <div class="investments-main">
-                    <!-- Total Investments Card -->
-                    <div class="card investments-total-card">
-                        <div class="investments-total-header">
-                            <div class="total-investments-info">
-                                <h3>₹2,75,000</h3>
-                                <p class="total-label">Total investments</p>
-                                <div class="growth-indicator">
-                                    <i class="ri-rocket-line"></i>
-                                    <span>+ ₹15,000 last month (up 6%)</span>
-                                </div>
-                                <p class="motivational-text">Great going, User-name!</p>
-                            </div>
-                            <div class="investments-chart-section">
-                                <div class="investments-chart-container">
-                                    <canvas id="investmentsChart"></canvas>
-                                    <p class="chart-center-label">₹2,75,000<br><span>Total investments</span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Investment Cards Grid -->
-                    <div class="investment-cards-grid">
-                        <!-- SIP Investments Card -->
-                        <div class="card investment-card">
-                            <div class="investment-card-header">
-                                <div class="investment-icon bg-blue">
-                                    <i class="ri-add-circle-line"></i>
-                                </div>
-                                <div class="investment-title-section">
-                                    <h4>SIP Investments</h4>
-                                    <div class="investment-amount">₹1,40,000</div>
-                                    <div class="investment-percentage">51%</div>
-                                </div>
-                            </div>
-                            <p class="investment-description">SIPs Monthly SIP 5/5 deposited installments</p>
-                        </div>
-
-                        <!-- Stocks Card -->
-                        <div class="card investment-card">
-                            <div class="investment-card-header">
-                                <div class="investment-icon bg-purple">
-                                    <i class="ri-bar-chart-line"></i>
-                                </div>
-                                <div class="investment-title-section">
-                                    <h4>Stocks</h4>
-                                    <div class="investment-amount">₹75,000</div>
-                                </div>
-                            </div>
-                            <div class="investment-growth">
-                                <i class="ri-wallet-line"></i>
-                                <span class="growth-text positive">Current value +9.6%</span>
-                            </div>
-                        </div>
-
-                        <!-- Total FDs Card -->
-                        <div class="card investment-card">
-                            <div class="investment-card-header">
-                                <div class="investment-icon bg-yellow">
-                                    <i class="ri-file-line"></i>
-                                    <span class="icon-badge">4%</span>
-                                </div>
-                                <div class="investment-title-section">
-                                    <h4>Total FDs</h4>
-                                    <div class="investment-amount">₹50,000</div>
-                                    <div class="investment-percentage">16%</div>
-                                </div>
-                            </div>
-                            <p class="investment-description">₹1.5 Lakhs Renewed</p>
-                        </div>
-
-                        <!-- FDs Card -->
-                        <div class="card investment-card">
-                            <div class="investment-card-header">
-                                <div class="investment-icon bg-teal">
-                                    <i class="ri-building-line"></i>
-                                </div>
-                                <div class="investment-title-section">
-                                    <h4>FDs</h4>
-                                    <div class="investment-amount">₹50,000</div>
-                                </div>
-                            </div>
-                            <p class="investment-description">Nip FD ₹15 Lakhs Renewed</p>
-                        </div>
-
-                        <!-- Mutual Funds Card -->
-                        <div class="card investment-card">
-                            <div class="investment-card-header">
-                                <div class="investment-icon bg-green">
-                                    <i class="ri-plant-line"></i>
-                                </div>
-                                <div class="investment-title-section">
-                                    <h4>Mutual Funds</h4>
-                                    <div class="investment-amount">₹10,000</div>
-                                    <div class="investment-percentage">4%</div>
-                                </div>
-                            </div>
-                            <div class="investment-growth">
-                                <span class="growth-text positive">Current value +6% last month</span>
-                            </div>
-                            <button class="view-details-btn">View Details</button>
-                        </div>
-                    </div>
-
-                    <!-- Smart Investing Tips Card -->
-                    <div class="card investing-tips-card">
-                        <div class="tips-content">
-                            <div class="tips-icon">
-                                <i class="ri-lightbulb-flash-line"></i>
-                            </div>
-                            <div class="tips-text">
-                                <h4>Smart Investing Tips</h4>
-                                <p>Consider increasing your SIP by 5% each year. Compound growth works wonders in the long run!</p>
-                            </div>
-                            <button class="add-investment-btn">
-                                + Add Investment
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Panel - Ask FinGuide AI -->
-                <div class="investments-right">
-                    <div class="card ask-card">
-                        <div class="ask-header-icons">
-                            <i class="ri-more-2-line"></i>
-                        </div>
-                        <p class="eyebrow">Ask SpendX AI</p>
-                        <div class="ai-robot">
-                           
-                        </div>
-                        <h3>Ask SpendX AI</h3>
-                        <p class="subtitle">Ask anything, I'm here to help!</p>
-
-                        <div class="ask-suggestions">
-                            <button class="pill yellow" onclick="switchTab('ask', null, 'Where to invest?')">
-                                <i class="ri-lightbulb-line"></i>
-                                Where to invest?
-                            </button>
-                            <button class="pill red" onclick="switchTab('ask', null, 'Track expenses')">
-                                <i class="ri-file-list-3-line"></i>
-                                Track expenses
-                            </button>
-                            <button class="ask-primary" onclick="switchTab('ask', null, 'Can I afford a ₹5,000 SIP?')">
-                                Can I afford a ₹5,000 SIP?
-                            </button>
-                        </div>
-
-                        <div class="ask-chat-history" id="investments-chat-history" style="display: none;">
-                            <div class="chat-history-header-item">
-                                <div class="gemini-header">
-                                    <span class="gemini-icon">G</span>
-                                    <span class="ai-name">SpendX</span>
-                                </div>
-                            </div>
-                            <div class="chat-history-item investment-chat">
-                                <div class="chat-history-content">
-                                    <h5>Monthly SIP</h5>
-                                    <div class="sip-progress">
-                                        <div class="sip-progress-info">
-                                            <span>₹5,00/5000</span>
-                                            <span>10.0%</span>
-                                        </div>
-                                        <div class="sip-progress-bar">
-                                            <div class="sip-progress-fill" style="width: 10%;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="chat-history-item investment-chat">
-                                <div class="chat-history-content">
-                                    <h5>Trip Fund</h5>
-                                    <div class="sip-progress">
-                                        <div class="sip-progress-info">
-                                            <span>₹10,000</span>
-                                            <span>50%</span>
-                                        </div>
-                                        <div class="sip-progress-bar">
-                                            <div class="sip-progress-fill" style="width: 50%;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="chat-history-item investment-chat">
-                                <div class="chat-history-content">
-                                    <h5>Tata SIP</h5>
-                                    <p>₹5,000</p>
-                                    <span class="date">March 31, "SIPs"</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="ask-ai-reply" id="investments-ai-reply">
-                            <div class="reply-header">
-                                <span class="ai-name">Gemini</span>
-                            </div>
-                            <div class="reply-body">
-                                <p class="reply-text">Hi 👋<br>I'm SpendX AI, your personal finance copilot.<br>Ask me anything about money, savings, SIPs, investments, budgeting, or financial planning!</p>
-                            </div>
-                        </div>
-
-                        <div class="ask-input-mini">
-                            <input type="text" placeholder="Ask me anything..." />
-                            <button><i class="ri-send-plane-fill"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- EMI / BILLS VIEW -->
-        <div id="emi-view" class="emi-view">
-            <div class="emi-header">
-                <div>
-                    <h2>EMI / Bills</h2>
-                    <p class="subtitle">Your Payments Overview</p>
-                </div>
-            </div>
-
-            <div class="emi-subnav">
-                <button class="subnav-btn">Overview</button>
-                <button class="subnav-btn active">Tracking</button>
-                <button class="subnav-btn">EMI</button>
-                <button class="subnav-btn">Bills</button>
-                <button class="subnav-btn">Bills <i class="ri-arrow-right-s-line"></i></button>
-            </div>
-
-            <div class="emi-content-grid">
-                <div class="emi-main">
-                    <!-- Upcoming This Month Summary -->
-                    <div class="card emi-summary-card">
-                        <div class="emi-summary-header">
-                            <h3>₹5,000</h3>
-                            <p class="emi-summary-label">Upcoming this month</p>
-                        </div>
-                        <div class="emi-status-message">
-                            <span>🎉</span>
-                            <span>Good news! All payments are on time so far</span>
-                        </div>
-                        <div class="emi-progress-bars">
-                            <div class="emi-progress-item">
-                                <div class="emi-progress-header">
-                                    <span>EMI Due</span>
-                                    <span class="emi-progress-amount">₹3,500</span>
-                                </div>
-                                <div class="emi-progress-bar">
-                                    <div class="emi-progress-fill blue" style="width: 70%;"></div>
-                                </div>
-                            </div>
-                            <div class="emi-progress-item">
-                                <div class="emi-progress-header">
-                                    <span>Bills Due</span>
-                                    <span class="emi-progress-amount">₹1,500</span>
-                                </div>
-                                <div class="emi-progress-bar">
-                                    <div class="emi-progress-fill green" style="width: 30%;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- EMI Tracking Reminder -->
-                    <div class="card emi-reminder-card">
-                        <div class="emi-reminder-content">
-                            <div class="emi-reminder-icon">
-                                <i class="ri-time-line"></i>
-                            </div>
-                            <div class="emi-reminder-text">
-                                <p>Track EMI. Set reminders to never miss a payment deadline! I'll remind you at every step.</p>
-                            </div>
-                            <button class="emi-tracker-btn">
-                                Full Tracker <i class="ri-arrow-right-s-line"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- EMI / Bills Breakdown -->
-                    <div class="emi-breakdown-grid">
-                        <!-- Left Column: Upcoming Payments -->
-                        <div class="card emi-breakdown-card">
-                            <div class="breakdown-header">
-                                <h4>Upcoming Payments</h4>
-                                <button class="link-btn">Full Tracker</button>
-                            </div>
-                            
-                            <div class="payment-item-detailed">
-                                <div class="payment-icon-detailed bg-blue">
-                                    <i class="ri-home-line"></i>
-                                </div>
-                                <div class="payment-info-detailed">
-                                    <h5>Home Loan</h5>
-                                    <p class="payment-installment">12/36 installments</p>
-                                    <p class="payment-status">12 of 36 Paid</p>
-                                </div>
-                                <div class="payment-amount-detailed">₹3,500</div>
-                            </div>
-
-                            <div class="payment-item-detailed">
-                                <div class="payment-icon-detailed bg-orange">
-                                    <i class="ri-phone-line"></i>
-                                </div>
-                                <div class="payment-info-detailed">
-                                    <h5>Phone EMI</h5>
-                                    <p class="payment-installment">May 1 installments</p>
-                                    <p class="payment-status">3 of 81 Paid</p>
-                                </div>
-                                <div class="payment-amount-detailed">₹1,500</div>
-                            </div>
-                        </div>
-
-                        <!-- Right Column: Bills Due -->
-                        <div class="card emi-breakdown-card">
-                            <div class="breakdown-header">
-                                <h4>Bills Due</h4>
-                                <button class="link-btn">Full Tracker</button>
-                            </div>
-                            
-                            <div class="bill-item-detailed">
-                                <div class="bill-info">
-                                    <h5>NETFLIX</h5>
-                                </div>
-                                <div class="bill-amount-detailed">₹500</div>
-                            </div>
-
-                            <div class="bill-item-detailed">
-                                <div class="bill-info">
-                                    <h5>Amazon Card</h5>
-                                    <p class="bill-due-date">5 days</p>
-                                    <p class="bill-minimum">₹500</p>
-                                </div>
-                                <div class="bill-amount-detailed">₹1,000</div>
-                            </div>
-
-                            <div class="bill-item-detailed">
-                                <div class="bill-info">
-                                    <div class="bill-icon-inline">
-                                        <i class="ri-building-line"></i>
-                                    </div>
-                                    <div>
-                                        <h5>Rent</h5>
-                                        <p class="bill-due-date">12 days</p>
-                                        <p class="bill-minimum">₹1,000</p>
-                                    </div>
-                                </div>
-                                <div class="bill-amount-detailed">₹1,000</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Payment History -->
-                    <div class="emi-history-grid">
-                        <!-- Left Column -->
-                        <div class="card emi-history-card">
-                            <h4>Payment History</h4>
-                            
-                            <div class="history-item">
-                                <div class="history-left">
-                                    <h5>Home Loan</h5>
-                                    <div class="history-meta">
-                                        <span>April 3</span>
-                                        <span class="history-tag">EMI</span>
-                                        <span class="history-tag">EML</span>
-                                    </div>
-                                </div>
-                                <div class="history-amount">₹3,500</div>
-                            </div>
-
-                            <div class="history-item">
-                                <div class="history-left">
-                                    <h5>Car Insurance</h5>
-                                    <div class="history-meta">
-                                        <span class="history-paid-badge">Paid!</span>
-                                        <span>₹5,000</span>
-                                        <span class="history-tag">SIPS</span>
-                                        <span class="history-tag">Tata SIP</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Right Column -->
-                        <div class="card emi-history-card">
-                            <h4>Payment History</h4>
-                            
-                            <div class="history-item">
-                                <div class="history-left">
-                                    <h5>Home Loan</h5>
-                                    <div class="history-meta">
-                                        <span>April 1</span>
-                                        <span class="history-tag">EMI</span>
-                                        <span class="history-tag">EML</span>
-                                    </div>
-                                </div>
-                                <div class="history-amount">₹3,500</div>
-                            </div>
-
-                            <div class="history-item">
-                                <div class="history-left">
-                                    <h5>Tata SIP</h5>
-                                    <div class="history-meta">
-                                        <span>March 34</span>
-                                        <span class="history-tag">EMI</span>
-                                        <span class="history-tag">Bills</span>
-                                    </div>
-                                </div>
-                                <div class="history-amount">₹5,000</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Panel - Ask SpendX AI -->
-                <div class="emi-right">
-                    <div class="card ask-card">
-                        <div class="ask-header-icons">
-                            <i class="ri-more-2-line"></i>
-                        </div>
-                        <p class="eyebrow">Ask SpendX AI</p>
-                        <div class="ai-robot">
-                           
-                        </div>
-                        <h3>Ask SpendX AI</h3>
-                        <p class="subtitle">Ask anything, I'm here to help!</p>
-
-                        <div class="ask-suggestions">
-                            <button class="pill yellow" onclick="switchTab('ask', null, 'Where to invest?')">
-                                <i class="ri-lightbulb-line"></i>
-                                Where to invest?
-                            </button>
-                            <button class="pill red" onclick="switchTab('ask', null, 'Track expenses')">
-                                <i class="ri-file-list-3-line"></i>
-                                Track expenses
-                            </button>
-                            <button class="ask-primary" onclick="switchTab('ask', null, 'Can I afford a ₹5,000 SIP?')">
-                                Can I afford a ₹5,000 SIP?
-                            </button>
-                        </div>
-
-                        <div class="ask-chat-history" id="emi-chat-history" style="display: none;">
-                            <div class="chat-history-header-item">
-                                <div class="gemini-header">
-                                    <span class="gemini-icon">G</span>
-                                    <span class="ai-name">SpendX</span>
-                                </div>
-                            </div>
-                            <div class="chat-history-item emi-chat">
-                                <div class="chat-history-content">
-                                    <h5>Home Loan ₹3,500/3,500</h5>
-                                    <div class="emi-progress-bar-small">
-                                        <div class="emi-progress-fill-small blue" style="width: 35%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="chat-history-item emi-chat">
-                                <div class="chat-history-content">
-                                    <h5>Phone EMI ₹4,500/12000</h5>
-                                    <div class="emi-progress-bar-small">
-                                        <div class="emi-progress-fill-small yellow" style="width: 25%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="chat-history-item emi-chat">
-                                <div class="chat-history-content">
-                                    <h5>Amazon Card</h5>
-                                    <p>₹1,000</p>
-                                    <span class="date">3 days, Bills</span>
-                                </div>
-                            </div>
-                            <div class="chat-history-item emi-chat">
-                                <div class="chat-history-content">
-                                    <h5>Rent</h5>
-                                    <p>₹1,000</p>
-                                    <span class="date">12 days, Bills</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="ask-ai-reply" id="emi-ai-reply">
-                            <div class="reply-header">
-                                <span class="ai-name">Gemini</span>
-                            </div>
-                            <div class="reply-body">
-                                <p class="reply-text">Hi 👋<br>I'm SpendX AI, your personal finance copilot.<br>Ask me anything about money, savings, SIPs, investments, budgeting, or financial planning!</p>
-                            </div>
-                        </div>
-
-                        <div class="ask-input-mini">
-                            <input type="text" placeholder="Ask me anything..." />
-                            <button><i class="ri-send-plane-fill"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- GOALS VIEW -->
-        <div id="goals-view" class="goals-view">
-            <div class="goals-header">
-                <div>
-                    <h2>Goals</h2>
-                    <p class="subtitle">Your Financial Milestones</p>
-                </div>
-            </div>
-
-            <div class="goals-subnav">
-                <button class="subnav-btn active">Overview</button>
-                <button class="subnav-btn">Tracker <i class="ri-arrow-right-s-line"></i></button>
-            </div>
-
-            <div class="goals-content-grid">
-                <div class="goals-main">
-                    <!-- Goal Cards List -->
-                    <div class="goals-list">
-                        <!-- Monthly SIP Goal -->
-                        <div class="card goal-card">
-                            <div class="goal-card-content">
-                                <div class="goal-icon bg-blue">
-                                    <i class="ri-add-circle-line"></i>
-                                </div>
-                                <div class="goal-details">
-                                    <div class="goal-header-row">
-                                        <h4>Monthly SIP</h4>
-                                        <span class="goal-badge completed">100% Completed</span>
-                                    </div>
-                                    <p class="goal-description">5/5 Deposited installments</p>
-                                    <div class="goal-amount-row">
-                                        <span class="goal-amount">₹5,000/₹5,000</span>
-                                        <span class="goal-status achieved">Goal Achieved!</span>
-                                    </div>
-                                    <div class="goal-progress-section">
-                                        <div class="goal-progress-bar">
-                                            <div class="goal-progress-fill completed" style="width: 100%;"></div>
-                                        </div>
-                                        <span class="goal-progress-label">100%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Trip Fund Goal -->
-                        <div class="card goal-card">
-                            <div class="goal-card-content">
-                                <div class="goal-icon bg-yellow">
-                                    <i class="ri-plane-line"></i>
-                                </div>
-                                <div class="goal-details">
-                                    <div class="goal-header-row">
-                                        <h4>Trip Fund</h4>
-                                        <span class="goal-badge in-progress">50% Completed</span>
-                                    </div>
-                                    <p class="goal-description">Upcoming Trip Savings</p>
-                                    <div class="goal-amount-row">
-                                        <span class="goal-amount">₹10,000/₹22,000</span>
-                                    </div>
-                                    <div class="goal-saved-info">
-                                        <span>₹10,000/₹20,000 Saved Goal</span>
-                                    </div>
-                                    <div class="goal-progress-section">
-                                        <div class="goal-progress-bar">
-                                            <div class="goal-progress-fill in-progress" style="width: 50%;"></div>
-                                        </div>
-                                        <span class="goal-progress-label">50%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Emergency Fund Goal -->
-                        <div class="card goal-card">
-                            <div class="goal-card-content">
-                                <div class="goal-icon bg-green-light">
-                                    <i class="ri-shield-check-line"></i>
-                                </div>
-                                <div class="goal-details">
-                                    <div class="goal-header-row">
-                                        <h4>Emergency Fund</h4>
-                                        <span class="goal-badge over-completed">80% Completed</span>
-                                    </div>
-                                    <p class="goal-description">Upcoming Trip Savs</p>
-                                    <div class="goal-amount-row">
-                                        <span class="goal-amount">₹12,000</span>
-                                    </div>
-                                    <div class="goal-saved-info">
-                                        <span>₹12,000/₹10,000 Saved</span>
-                                    </div>
-                                    <div class="goal-progress-section">
-                                        <div class="goal-progress-bar over-completed-bar">
-                                            <div class="goal-progress-fill over-completed" style="width: 80%;"></div>
-                                        </div>
-                                        <span class="goal-progress-label">80%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Add Goal Button -->
-                        <button class="add-goal-card-btn">
-                            <i class="ri-add-line"></i>
-                            <span>Add Goal</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Right Panel - Ask FinGuide AI -->
-                <div class="goals-right">
-                    <div class="card ask-card">
-                        <div class="ask-header-icons">
-                            <i class="ri-more-2-line"></i>
-                        </div>
-                        <p class="eyebrow">Ask SpendX AI</p>
-                        <div class="ai-robot">
-                            
-                        </div>
-                        <h3>Ask SpendX AI</h3>
-                        <p class="subtitle">Ask anything, I'm here to help!</p>
-
-                        <div class="goals-suggestions-list" id="goals-suggestions-list" style="display: none;">
-                            <!-- Emergency Fund Suggestion -->
-                            <div class="goal-suggestion-card">
-                                <div class="goal-suggestion-icon bg-green-light">
-                                    <i class="ri-shield-check-line"></i>
-                                </div>
-                                <div class="goal-suggestion-details">
-                                    <h5>Emergency Fund</h5>
-                                    <div class="goal-suggestion-amounts">
-                                        <span class="main-amount">₹12,000/1,00,000</span>
-                                        <span class="additional-amount">₹200/10,000</span>
-                                    </div>
-                                    <div class="goal-suggestion-progress">
-                                        <div class="goal-suggestion-progress-bar">
-                                            <div class="goal-suggestion-progress-fill" style="width: 20%;"></div>
-                                        </div>
-                                        <span class="goal-suggestion-percentage">20%</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- New Car Suggestion -->
-                            <div class="goal-suggestion-card">
-                                <div class="goal-suggestion-icon bg-blue">
-                                    <i class="ri-car-line"></i>
-                                </div>
-                                <div class="goal-suggestion-details">
-                                    <h5>New Car</h5>
-                                    <div class="goal-suggestion-amounts">
-                                        <span class="main-amount">₹50,000/8,00,000</span>
-                                        <span class="additional-amount">₹8,00,000</span>
-                                    </div>
-                                    <div class="goal-suggestion-progress">
-                                        <div class="goal-suggestion-progress-bar">
-                                            <div class="goal-suggestion-progress-fill" style="width: 6%;"></div>
-                                        </div>
-                                        <span class="goal-suggestion-percentage">6%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="ask-ai-reply" id="goals-ai-reply">
-                            <div class="reply-header">
-                                <span class="ai-name">Gemini</span>
-                            </div>
-                            <div class="reply-body">
-                                <p class="reply-text">Hi 👋<br>I'm SpendX AI, your personal finance copilot.<br>Ask me anything about money, savings, SIPs, investments, budgeting, or financial planning!</p>
-                            </div>
-                        </div>
-
-                        <div class="ask-input-mini">
-                            <input type="text" placeholder="Ask me anything..." />
-                            <button><i class="ri-send-plane-fill"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- PROFILE VIEW -->
-        <div id="profile-view" class="profile-view">
-            <div class="profile-header-section">
-                <div class="profile-cover">
-                    <div class="profile-avatar-large">
-                        <img src="user.png.png" alt="User" class="avatar-large">
-                        <button class="edit-avatar-btn">
-                            <i class="ri-camera-line"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="profile-info-header">
-                    <h2>User-name</h2>
-                    <p class="profile-email">user-email@mail.com</p>
-                    <div class="profile-badge">
-                        <i class="ri-vip-crown-line"></i>
-                        <span>Premium Member</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="profile-content-grid">
-                <div class="profile-main">
-                    <!-- Personal Information -->
-                    <div class="card profile-section-card">
-                        <div class="card-head">
-                            <h3>Personal Information</h3>
-                            <button class="edit-btn">
-                                <i class="ri-edit-line"></i> Edit
-                            </button>
-                        </div>
-                        <div class="profile-info-grid">
-                            <div class="info-item">
-                                <label>Full Name</label>
-                                <p>User-name</p>
-                            </div>
-                            <div class="info-item">
-                                <label>Email</label>
-                                <p>user-email@mail.com</p>
-                            </div>
-                            <div class="info-item">
-                                <label>Phone</label>
-                                <p>+91 98765 *****</p>
-                            </div>
-                            <div class="info-item">
-                                <label>Date of Birth</label>
-                                <p>January 15, 1995</p>
-                            </div>
-                            <div class="info-item">
-                                <label>Address</label>
-                                <p>123 odisha ,*****</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Account Settings -->
-                    <div class="card profile-section-card">
-                        <div class="card-head">
-                            <h3>Account Settings</h3>
-                        </div>
-                        <div class="settings-list">
-                            <div class="setting-item">
-                                <div class="setting-left">
-                                    <div class="setting-icon bg-blue">
-                                        <i class="ri-lock-password-line"></i>
-                                    </div>
-                                    <div class="setting-info">
-                                        <h4>Change Password</h4>
-                                        <p>Update your password regularly for security</p>
-                                    </div>
-                                </div>
-                                <i class="ri-arrow-right-s-line setting-arrow"></i>
-                            </div>
-
-                            <div class="setting-item">
-                                <div class="setting-left">
-                                    <div class="setting-icon bg-green">
-                                        <i class="ri-notification-3-line"></i>
-                                    </div>
-                                    <div class="setting-info">
-                                        <h4>Notifications</h4>
-                                        <p>Manage your notification preferences</p>
-                                    </div>
-                                </div>
-                                <i class="ri-arrow-right-s-line setting-arrow"></i>
-                            </div>
-
-                            <div class="setting-item">
-                                <div class="setting-left">
-                                    <div class="setting-icon bg-purple">
-                                        <i class="ri-shield-check-line"></i>
-                                    </div>
-                                    <div class="setting-info">
-                                        <h4>Privacy & Security</h4>
-                                        <p>Control your privacy settings</p>
-                                    </div>
-                                </div>
-                                <i class="ri-arrow-right-s-line setting-arrow"></i>
-                            </div>
-
-                            <div class="setting-item">
-                                <div class="setting-left">
-                                    <div class="setting-icon bg-yellow">
-                                        <i class="ri-bank-card-line"></i>
-                                    </div>
-                                    <div class="setting-info">
-                                        <h4>Payment Methods</h4>
-                                        <p>Manage your linked cards and bank accounts</p>
-                                    </div>
-                                </div>
-                                <i class="ri-arrow-right-s-line setting-arrow"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Subscription -->
-                    <div class="card profile-section-card">
-                        <div class="card-head">
-                            <h3>Subscription</h3>
-                        </div>
-                        <div class="subscription-card">
-                            <div class="subscription-info">
-                                <div class="subscription-icon">
-                                    <i class="ri-vip-crown-fill"></i>
-                                </div>
-                                <div>
-                                    <h4>Premium Plan</h4>
-                                    <p>Active until December 31, 2024</p>
-                                </div>
-                            </div>
-                            <button class="manage-subscription-btn">Manage</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Sidebar - Quick Stats -->
-                <div class="profile-sidebar">
-                    <!-- Financial Summary -->
-                    <div class="card profile-stats-card">
-                        <h3>Financial Summary</h3>
-                        <div class="stats-list">
-                            <div class="stat-item">
-                                <div class="stat-icon bg-blue">
-                                    <i class="ri-wallet-3-line"></i>
-                                </div>
-                                <div class="stat-details">
-                                    <p class="stat-label">Monthly Income</p>
-                                    <p class="stat-value">₹30,000</p>
-                                </div>
-                            </div>
-
-                            <div class="stat-item">
-                                <div class="stat-icon bg-red">
-                                    <i class="ri-file-list-3-line"></i>
-                                </div>
-                                <div class="stat-details">
-                                    <p class="stat-label">Monthly Expenses</p>
-                                    <p class="stat-value">₹19,000</p>
-                                </div>
-                            </div>
-
-                            <div class="stat-item">
-                                <div class="stat-icon bg-green">
-                                    <i class="ri-line-chart-line"></i>
-                                </div>
-                                <div class="stat-details">
-                                    <p class="stat-label">Total Investments</p>
-                                    <p class="stat-value">₹2,75,000</p>
-                                </div>
-                            </div>
-
-                            <div class="stat-item">
-                                <div class="stat-icon bg-purple">
-                                    <i class="ri-flag-line"></i>
-                                </div>
-                                <div class="stat-details">
-                                    <p class="stat-label">Active Goals</p>
-                                    <p class="stat-value">3</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Quick Actions -->
-                    <div class="card profile-actions-card">
-                        <h3>Quick Actions</h3>
-                        <div class="quick-actions-list">
-                            <button class="quick-action-btn" onclick="switchTab('dashboard', null)">
-                                <i class="ri-dashboard-line"></i>
-                                <span>Go to Dashboard</span>
-                            </button>
-                            <button class="quick-action-btn" onclick="switchTab('goals', null)">
-                                <i class="ri-flag-line"></i>
-                                <span>View Goals</span>
-                            </button>
-                            <button class="quick-action-btn" onclick="switchTab('investments', null)">
-                                <i class="ri-line-chart-line"></i>
-                                <span>Check Investments</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         </main>
 
@@ -1889,8 +1332,10 @@
                     <div class="form-group">
                         <label>Amount (₹)</label>
                         <div style="display: flex; gap: 10px; align-items: center;">
-                            <input type="number" name="expenseAmount" id="expenseAmount" placeholder="0" min="0" step="0.01" required style="flex: 1;">
-                            <button type="button" class="camera-btn" onclick="openCameraModal()" title="Scan Bill with Camera">
+                            <input type="number" name="expenseAmount" id="expenseAmount" placeholder="0" min="0"
+                                step="0.01" required style="flex: 1;">
+                            <button type="button" class="camera-btn" onclick="openCameraModal()"
+                                title="Scan Bill with Camera">
                                 <i class="ri-camera-line"></i>
                             </button>
                         </div>
@@ -1905,10 +1350,13 @@
 
         <!-- Tesseract.js for OCR -->
         <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
-        
+
+        <!-- PDF.js for PDF parsing -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
         <!-- Chart.js for Insights Graph -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        
+
         <!-- Camera Bill Scanner Modal -->
         <div id="cameraModal" class="modal" style="display: none;">
             <div class="modal-content" style="max-width: 600px;">
@@ -1919,19 +1367,23 @@
                     </button>
                 </div>
                 <div class="camera-container" style="padding: 20px;">
-                    <div id="camera-preview" style="width: 100%; background: #000; border-radius: 8px; overflow: hidden; margin-bottom: 15px; position: relative; min-height: 300px; display: flex; align-items: center; justify-content: center;">
-                        <video id="camera-video" autoplay playsinline style="width: 100%; max-height: 400px; display: none;"></video>
+                    <div id="camera-preview"
+                        style="width: 100%; background: #000; border-radius: 8px; overflow: hidden; margin-bottom: 15px; position: relative; min-height: 300px; display: flex; align-items: center; justify-content: center;">
+                        <video id="camera-video" autoplay playsinline
+                            style="width: 100%; max-height: 400px; display: none;"></video>
                         <canvas id="camera-canvas" style="display: none;"></canvas>
                         <div id="camera-placeholder" style="color: #fff; text-align: center; padding: 20px;">
                             <i class="ri-camera-line" style="font-size: 3rem; margin-bottom: 10px; display: block;"></i>
                             <p>Camera will appear here</p>
                         </div>
                         <div id="captured-image-preview" style="display: none; width: 100%;">
-                            <img id="captured-img" style="width: 100%; max-height: 400px; object-fit: contain;" alt="Captured bill">
+                            <img id="captured-img" style="width: 100%; max-height: 400px; object-fit: contain;"
+                                alt="Captured bill">
                         </div>
                     </div>
-                    
-                    <div id="camera-controls" style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
+
+                    <div id="camera-controls"
+                        style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
                         <button id="start-camera-btn" class="btn-primary" onclick="startCamera()">
                             <i class="ri-camera-line"></i> Start Camera
                         </button>
@@ -1942,31 +1394,39 @@
                             <i class="ri-refresh-line"></i> Retake
                         </button>
                     </div>
-                    
-                    <div id="processing-status" style="display: none; text-align: center; padding: 15px; background: #f0f9ff; border-radius: 8px; margin-bottom: 15px;">
-                        <div class="loading-spinner" style="display: inline-block; width: 20px; height: 20px; border: 3px solid #3b82f6; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 10px;"></div>
+
+                    <div id="processing-status"
+                        style="display: none; text-align: center; padding: 15px; background: #f0f9ff; border-radius: 8px; margin-bottom: 15px;">
+                        <div class="loading-spinner"
+                            style="display: inline-block; width: 20px; height: 20px; border: 3px solid #3b82f6; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 10px;">
+                        </div>
                         <span id="processing-text">Processing image...</span>
                     </div>
-                    
-                    <div id="extracted-data" style="display: none; padding: 15px; background: #f8fafc; border-radius: 8px; margin-bottom: 15px;">
+
+                    <div id="extracted-data"
+                        style="display: none; padding: 15px; background: #f8fafc; border-radius: 8px; margin-bottom: 15px;">
                         <h4 style="margin: 0 0 10px 0; font-size: 0.9rem; color: #64748b;">Extracted Information:</h4>
                         <div id="extracted-content" style="font-size: 0.85rem; color: #334155;"></div>
                     </div>
-                    
+
                     <div class="modal-actions">
                         <button type="button" class="btn-cancel" onclick="closeCameraModal()">Cancel</button>
-                        <button id="use-extracted-btn" type="button" class="btn-submit" onclick="useExtractedData()" style="display: none;">
+                        <button id="use-extracted-btn" type="button" class="btn-submit" onclick="useExtractedData()"
+                            style="display: none;">
                             <i class="ri-check-line"></i> Use This Data
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <style>
             @keyframes spin {
-                to { transform: rotate(360deg); }
+                to {
+                    transform: rotate(360deg);
+                }
             }
+
             .camera-btn {
                 width: 45px;
                 height: 45px;
@@ -1981,10 +1441,12 @@
                 font-size: 1.2rem;
                 transition: all 0.2s;
             }
+
             .camera-btn:hover {
                 background: #1d4ed8;
                 transform: scale(1.05);
             }
+
             .btn-secondary {
                 padding: 10px 20px;
                 border-radius: 8px;
@@ -1997,13 +1459,14 @@
                 gap: 8px;
                 transition: all 0.2s;
             }
+
             .btn-secondary:hover {
                 background: #475569;
             }
         </style>
         <script>
             // Handle custom category toggle
-            document.getElementById('expenseCategory')?.addEventListener('change', function() {
+            document.getElementById('expenseCategory')?.addEventListener('change', function () {
                 const customGroup = document.getElementById('customCategoryGroup');
                 if (this.value === 'custom') {
                     customGroup.style.display = 'block';
@@ -2018,4 +1481,5 @@
     </div> <!-- End of dashboard-app -->
 
 </body>
+
 </html>
